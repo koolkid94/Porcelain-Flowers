@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "porcelain-flowers",
+	"version": "${version}",
+	"name": "Porcelain Flowers",
+	"description": "A villager rework!",
+	"authors": [
+		"kuwulkid95"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "MIT",
+	"icon": "assets/porcelain-flowers/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.kuwulkid.porcelain.PorcelainFlowers"
+		],
+		"client": [
+			"net.kuwulkid.porcelain.PorcelainFlowersClient"
+		],
+		"fabric-datagen": [
+			"net.kuwulkid.porcelain.PorcelainFlowersDataGenerator"
+		]
+	},
+	"mixins": [
+		"porcelain-flowers.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
