@@ -23,6 +23,12 @@ repositories {
 		content {
 			includeGroup("software.bernie.geckolib")
 		}
+
+	}
+
+	maven {
+		name = "SmartBrainLib (SBL) Maven Repo"
+		url = "https://dl.cloudsmith.io/public/tslat/sbl/maven/"
 	}
 }
 
@@ -40,6 +46,8 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation "software.bernie.geckolib:geckolib-fabric-${minecraft_version}:${geckolib_version}"
+
+	modImplementation "net.tslat.smartbrainlib:SmartBrainLib-fabric-${project.minecraft_version}:${project.sbl_version}"
 	
 }
 
