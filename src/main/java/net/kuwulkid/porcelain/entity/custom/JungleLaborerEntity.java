@@ -8,9 +8,7 @@ import net.minecraft.entity.attribute.DefaultAttributeContainer;
 import net.minecraft.entity.attribute.EntityAttributes;
 import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.VillagerEntity;
+import net.minecraft.entity.passive.*;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.world.ServerWorld;
@@ -30,14 +28,14 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class JungleLaborerEntity extends LivingEntity implements GeoEntity, SmartBrainOwner<JungleLaborerEntity> {
+public class JungleLaborerEntity extends VillagerEntity implements GeoEntity{
     int output, numOne = 0, numTwo = 4;
     protected static final RawAnimation WALK_ANIM = RawAnimation.begin().thenLoop("animation.villager.walk");
     protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("animation.villager.idle");
     protected static final RawAnimation IDLE_ANIM2 = RawAnimation.begin().thenLoop("animation.villager.fishing");
     protected static final RawAnimation SWIM_ANIM = RawAnimation.begin().thenLoop("animation.villager.swim");
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
-   public JungleLaborerEntity(EntityType<? extends JungleLaborerEntity> entityType, World world) {
+   public JungleLaborerEntity(EntityType<? extends VillagerEntity> entityType, World world) {
         super(entityType, world);
     }
 
@@ -46,8 +44,6 @@ public class JungleLaborerEntity extends LivingEntity implements GeoEntity, Smar
         controllers.add(new AnimationController<>(this, "Walking", 5, this::walkAnimController));
     }
 
-    protected final void registerGoals() {}
-    // Let's make sure we're definitely not using any goals
 
     @Override
     public AnimatableInstanceCache getAnimatableInstanceCache() {
@@ -83,7 +79,6 @@ public class JungleLaborerEntity extends LivingEntity implements GeoEntity, Smar
     @Nullable
     protected SoundEvent getAmbientSound() {
             return SoundEvents.ENTITY_VILLAGER_AMBIENT;
-
     }
 
     protected SoundEvent getHurtSound(DamageSource source) {
@@ -114,9 +109,12 @@ public class JungleLaborerEntity extends LivingEntity implements GeoEntity, Smar
         return null;
     }
 
-    @Override
-    public List<? extends ExtendedSensor<? extends JungleLaborerEntity>> getSensors() {
-        return null;
+    protected void initGoals() {
+        this.goalSelector.add(0, new EscapeDangerGoal(this, 1.25));
+        this.goalSelector.add(0, new SwimGoal(this));
+        this.goalSelector.add(1, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
+        this.goalSelector.add(3, new WanderAroundFarGoal(this, 1.0));
     }
+
 
 }
