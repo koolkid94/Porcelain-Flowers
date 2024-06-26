@@ -2,6 +2,9 @@ package net.kuwulkid.porcelain;
 
 import net.fabricmc.api.ModInitializer;
 
+import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
+import net.kuwulkid.porcelain.entity.ModEntities;
+import net.kuwulkid.porcelain.entity.custom.JungleLaborerEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,5 +23,6 @@ public class PorcelainFlowers implements ModInitializer {
 		// Proceed with mild caution.
 
 		LOGGER.info("Hello Fabric world!");
+		FabricDefaultAttributeRegistry.register(ModEntities.JUNGLELABORER, JungleLaborerEntity.createJungleLaborerAttributes());
 	}
 }
