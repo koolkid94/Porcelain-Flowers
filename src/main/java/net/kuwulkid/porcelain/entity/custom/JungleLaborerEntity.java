@@ -45,8 +45,8 @@ public class JungleLaborerEntity extends AnimalEntity implements GeoEntity{
 
     public static DefaultAttributeContainer.Builder createJungleLaborerAttributes(){
         return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 3)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,0.5);
+                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20)
+                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,0.21);
 
     }
 
@@ -96,29 +96,8 @@ public class JungleLaborerEntity extends AnimalEntity implements GeoEntity{
         return SoundEvents.ENTITY_VILLAGER_DEATH;
     }
 
-    @Override
-    public Iterable<ItemStack> getArmorItems() {
-        return null;
-    }
-
-    @Override
-    public ItemStack getEquippedStack(EquipmentSlot slot) {
-        return null;
-    }
-
-    @Override
-    public void equipStack(EquipmentSlot slot, ItemStack stack) {
-
-    }
-
-    @Override
-    public Arm getMainArm() {
-        return null;
-    }
-
     protected void initGoals() {
         this.goalSelector.add(1, new SwimGoal(this));
-        //this.goalSelector.add(2, new ProjectileAttackGoal(this, 1.0, 60, 10.0F));
         this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0));
         this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.add(4, new LookAroundGoal(this));
