@@ -2,57 +2,52 @@ package net.kuwulkid.porcelain.entity.custom;
 
 //import net.minecraft.server.level.ServerLevel;
 
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.ai.goal.*;
-import net.minecraft.entity.attribute.DefaultAttributeContainer;
-import net.minecraft.entity.attribute.EntityAttributes;
-import net.minecraft.entity.damage.DamageSource;
-import net.minecraft.entity.mob.MobEntity;
-import net.minecraft.entity.passive.AnimalEntity;
-import net.minecraft.entity.passive.PassiveEntity;
-import net.minecraft.entity.passive.VillagerEntity;
-import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.item.ItemStack;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundEvent;
-import net.minecraft.sound.SoundEvents;
-import net.minecraft.util.Arm;
-import net.minecraft.world.World;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.AgeableMob;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.Mob;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.ai.attributes.Attributes;
+import net.minecraft.sounds.SoundEvent;
+import net.minecraft.world.entity.ai.goal.FloatGoal;
+import net.minecraft.world.entity.ai.goal.LookAtPlayerGoal;
+import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
+import net.minecraft.world.entity.ai.goal.WaterAvoidingRandomStrollGoal;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.Level;
 import net.tslat.smartbrainlib.api.SmartBrainOwner;
 import net.tslat.smartbrainlib.api.core.SmartBrainProvider;
 import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoAnimatable;
+import net.minecraft.world.entity.animal.Animal;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
+import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
 
 import java.util.List;
 
-public class JungleLaborerEntity extends AnimalEntity implements GeoEntity{
+public class JungleLaborerEntity extends Animal implements GeoEntity{
     int output, numOne = 0, numTwo = 4;
     protected static final RawAnimation WALK_ANIM = RawAnimation.begin().thenLoop("animation.villager.walk");
     protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("animation.villager.idle");
     protected static final RawAnimation IDLE_ANIM2 = RawAnimation.begin().thenLoop("animation.villager.fishing");
     protected static final RawAnimation SWIM_ANIM = RawAnimation.begin().thenLoop("animation.villager.swim");
     private final AnimatableInstanceCache geoCache = GeckoLibUtil.createInstanceCache(this);
-   public JungleLaborerEntity(EntityType<? extends AnimalEntity> entityType, World world) {
+   public JungleLaborerEntity(EntityType<? extends Animal> entityType, Level world) {
         super(entityType, world);
     }
 
-    public static DefaultAttributeContainer.Builder createJungleLaborerAttributes(){
-        return MobEntity.createMobAttributes()
-                .add(EntityAttributes.GENERIC_MAX_HEALTH, 20)
-                .add(EntityAttributes.GENERIC_MOVEMENT_SPEED,0.21);
+    public static AttributeSupplier.Builder createJungleLaborerAttributes(){
+        return Mob.createMobAttributes()
+                .add(Attributes.MAX_HEALTH, 20)
+                .add(Attributes.MOVEMENT_SPEED,0.21);
 
-    }
-
-    @Override
-    public boolean isBreedingItem(ItemStack stack) {
-        return false;
     }
 
     @Override
@@ -70,10 +65,10 @@ public class JungleLaborerEntity extends AnimalEntity implements GeoEntity{
 
     protected <E extends JungleLaborerEntity> PlayState walkAnimController(final AnimationState<E> event) {
 
-        if (event.isMoving() && !isTouchingWater()) {
+        if (event.isMoving() && !isInWater()) {
             return event.setAndContinue(WALK_ANIM);
         }
-        else if(isTouchingWater())
+        else if(isInWater())
         {
             return event.setAndContinue(SWIM_ANIM);
         }
@@ -84,30 +79,33 @@ public class JungleLaborerEntity extends AnimalEntity implements GeoEntity{
 
     @Nullable
     protected SoundEvent getAmbientSound() {
-            return SoundEvents.ENTITY_VILLAGER_AMBIENT;
+        return SoundEvents.VILLAGER_AMBIENT;
 
     }
 
     protected SoundEvent getHurtSound(DamageSource source) {
-        return SoundEvents.ENTITY_VILLAGER_HURT;
+        return SoundEvents.VILLAGER_HURT;
     }
 
     protected SoundEvent getDeathSound() {
-        return SoundEvents.ENTITY_VILLAGER_DEATH;
+        return SoundEvents.VILLAGER_DEATH;
     }
 
     protected void initGoals() {
-        this.goalSelector.add(1, new SwimGoal(this));
-        this.goalSelector.add(2, new WanderAroundFarGoal(this, 1.0));
-        this.goalSelector.add(3, new LookAtEntityGoal(this, PlayerEntity.class, 8.0F));
-        this.goalSelector.add(4, new LookAroundGoal(this));
-        this.goalSelector.add(5, new LookAtEntityGoal(this, MobEntity.class, 8.0F));
+        this.goalSelector.addGoal(1, new FloatGoal(this));
+        this.goalSelector.addGoal(2, new WaterAvoidingRandomStrollGoal(this, 1.0));
+        this.goalSelector.addGoal(3, new LookAtPlayerGoal(this, Player.class, 8.0F));
+        this.goalSelector.addGoal(4, new RandomLookAroundGoal(this));
     }
 
+    @Override
+    public boolean isFood(ItemStack stack) {
+        return false;
+    }
 
     @Nullable
     @Override
-    public PassiveEntity createChild(ServerWorld world, PassiveEntity entity) {
+    public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
         return null;
     }
 }

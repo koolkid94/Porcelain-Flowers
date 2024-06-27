@@ -5,6 +5,7 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.kuwulkid.porcelain.entity.ModEntities;
 import net.kuwulkid.porcelain.entity.custom.JungleLaborerEntity;
+import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,5 +25,9 @@ public class PorcelainFlowers implements ModInitializer {
 
 		LOGGER.info("Hello Fabric world!");
 		FabricDefaultAttributeRegistry.register(ModEntities.JUNGLELABORER, JungleLaborerEntity.createJungleLaborerAttributes());
+	}
+
+	public static ResourceLocation id(String path) {
+		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
 	}
 }
