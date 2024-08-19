@@ -5,6 +5,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.mixin.itemgroup.ItemGroupAccessor;
 import net.kuwulkid.porcelain.PorcelainFlowers;
 import net.kuwulkid.porcelain.blocks.custom.BeachFernBlock;
+import net.kuwulkid.porcelain.blocks.custom.BeachGrassesBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.registries.Registries;
@@ -28,6 +29,8 @@ public class ModBlocks {
     public static final Map<ResourceLocation, Item> BLOCK_ITEMS = Maps.newLinkedHashMap();
 
     public static final Block  BEACH_FERN = registerBlock((String) "beach_fern", new BeachFernBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).replaceable().noCollission().instabreak().sound(SoundType.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY)));
+
+    //public static final Block  BEACH_GRASSES = registerBlock((String) "beach_grasses", new BeachGrassesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).replaceable().noCollission().instabreak().sound(SoundType.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY)));
 
     public static <B extends Block> B registerBlock(String name, B block) {
         ModBlocks.BLOCK_ITEMS.put(PorcelainFlowers.id(name), new BlockItem(block, new Item.Properties()));
