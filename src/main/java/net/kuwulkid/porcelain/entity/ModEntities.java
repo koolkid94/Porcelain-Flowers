@@ -20,7 +20,7 @@ public class ModEntities {
                 "junglelaborer",
                 FabricEntityTypeBuilder.createMob()
                         .entityFactory(JungleLaborerEntity::new)
-                        .dimensions(EntityDimensions.scalable(2F, 1F))
+                        .dimensions(EntityDimensions.scalable(1F, 2F))
                         .build()
         );
 
