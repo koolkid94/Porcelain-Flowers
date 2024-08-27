@@ -8,6 +8,7 @@ import net.kuwulkid.porcelain.blocks.custom.BeachFernBlock;
 import net.kuwulkid.porcelain.entity.ModEntities;
 import net.kuwulkid.porcelain.entity.custom.JungleLaborerEntity;
 import net.kuwulkid.porcelain.item.ModItems;
+import net.kuwulkid.porcelain.world.gen.ModWorldGen;
 import net.minecraft.resources.ResourceLocation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,7 @@ public class PorcelainFlowers implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 		ModEntities.registerModEntities();
-
+		ModWorldGen.generateModWorldGen();
 
 		LOGGER.info("Hello thug...");
 
