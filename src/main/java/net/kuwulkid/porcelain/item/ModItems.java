@@ -18,7 +18,7 @@ public class ModItems {
     public static final Map<ResourceLocation, Item> ITEMS = Maps.newLinkedHashMap();
 
 
-    public static final Item VORPAL_GEM = register("vorpal_gem", new VorpalGemItem(Tiers.GOLD, new Item.Properties().durability(42).attributes(VorpalGemItem.createAttributes(Tiers.GOLD, 9, -2.4F)).rarity(Rarity.RARE)));
+    public static final Item VORPAL_GEM = register("vorpal_gem", new VorpalGemItem(ModTiers.AMETHYST, new Item.Properties().durability(42).attributes(VorpalGemItem.createAttributes(Tiers.GOLD, 18, -2.4F)).rarity(Rarity.RARE)));
 
 
     public static Item registerBaseItem(String name) {

@@ -10,14 +10,16 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.*;
+import net.minecraft.world.item.alchemy.PotionContents;
+import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 
 public class VorpalGemItem extends SwordItem {
-    int numOne = 0, numTwo = 6;
+    int numOne = 0, numTwo = 3;
 
     public VorpalGemItem(Tier tier, Properties properties) {
         super(tier, properties);
-        createAttributes(Tiers.GOLD, 6, 4);
+        createAttributes(Tiers.GOLD, 12, 8);
     }
 
     public static ItemAttributeModifiers createAttributes(Tier tier, int i, float f) {
@@ -36,18 +38,22 @@ public class VorpalGemItem extends SwordItem {
 
     @Override
     public void postHurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity attacker) {
-        itemStack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
-
-        EntityType.EXPERIENCE_BOTTLE.spawn((ServerLevel) target.level(), null, null,  attacker.blockPosition(), MobSpawnType.EVENT, true, true);
-
-
-
+        int rand = (int) ((5 - numOne + 1) * Math.random() + numOne);
+        itemStack.hurtAndBreak( 2 , attacker, EquipmentSlot.MAINHAND);
         target.level().addParticle(ParticleTypes.TOTEM_OF_UNDYING, (double)attacker.blockPosition().getX()+ Math.random(), (double)attacker.blockPosition().getY()+ 1, (double)attacker.blockPosition().getZ() + Math.random(), Math.random() * (1.001) , Math.random()  * (1.2), Math.random()  * (1.001));
 
         if(1 == (int) ((numTwo - numOne + 1) * Math.random() + numOne)) {
             BlockPos pos = target.blockPosition();
             target.spawnAtLocation(Items.AMETHYST_SHARD);
-            itemStack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
+            attacker.level().levelEvent(2002, attacker.blockPosition(), PotionContents.getColor(Potions.TURTLE_MASTER));
+            attacker.playSound(SoundEvents.ITEM_BREAK, 3, 4);
+            itemStack.hurtAndBreak(128, attacker, EquipmentSlot.MAINHAND);
+        }
+
+        if(attacker.getUseItem().getDamageValue() <= 0)
+        {
+            attacker.level().levelEvent(2002, attacker.blockPosition(), PotionContents.getColor(Potions.TURTLE_MASTER));
+            target.spawnAtLocation(Items.AMETHYST_SHARD);
             attacker.playSound(SoundEvents.ITEM_BREAK, 3, 4);
         }
     }
