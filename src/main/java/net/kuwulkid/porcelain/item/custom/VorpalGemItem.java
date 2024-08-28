@@ -14,6 +14,8 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 
+//ability where upon attack starts timer (shown thru durability) and gives massive damage buff
+
 public class VorpalGemItem extends SwordItem {
     int numOne = 0, numTwo = 3;
 

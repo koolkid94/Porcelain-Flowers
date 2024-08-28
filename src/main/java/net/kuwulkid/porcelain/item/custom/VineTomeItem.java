@@ -1,39 +1,43 @@
 package net.kuwulkid.porcelain.item.custom;
 
 import net.kuwulkid.porcelain.client.renderer.item.VineTomeRenderer;
-import net.minecraft.core.Direction;
+import net.kuwulkid.porcelain.entity.custom.SpikeEntity;
+import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.commands.Commands;
+import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.Mth;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.BookItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.phys.HitResult;
 import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib.animatable.GeoAnimatable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
 import software.bernie.geckolib.animatable.client.GeoRenderProvider;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
-import net.minecraft.commands.Commands;
 
-import net.minecraft.core.Registry;
-
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
+import net.minecraft.world.phys.HitResult;
 
 import java.util.function.Consumer;
 
 
-public final class VineTomeItem extends Item implements GeoItem {
+public final class VineTomeItem extends BookItem implements GeoItem {
 
 
     private static final RawAnimation IDLE = RawAnimation.begin().thenPlay("animation.vinetomeitem.idle");
@@ -56,7 +60,7 @@ public final class VineTomeItem extends Item implements GeoItem {
             private VineTomeRenderer renderer;
 
             @Override
-            public BlockEntityWithoutLevelRenderer getGeoItemRenderer() {
+            public @Nullable BlockEntityWithoutLevelRenderer getGeoItemRenderer() {
                 if (this.renderer == null)
                     this.renderer = new VineTomeRenderer();
                 // Defer creation of our renderer then cache it so that it doesn't get instantiated too early
@@ -80,44 +84,48 @@ public final class VineTomeItem extends Item implements GeoItem {
     }
 
     private PlayState idlePredicate(AnimationState<VineTomeItem> ItemAnimationState) {
-        return ItemAnimationState.setAndContinue(IDLE);
+        ItemAnimationState.getController().setAnimation(IDLE);
+        return PlayState.CONTINUE;
     }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return this.cache;
-    }
-
-
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
         if (level instanceof ServerLevel serverWorld) {
             Commands commandManager = player.getServer().getCommands();
-            commandManager.performCommand(player.createCommandSourceStack().dispatcher().parse("say hello",player.createCommandSourceStack() ), "this does nothing i think");
-            if(player.getMainHandItem().equals(this.getDefaultInstance())){
+            commandManager.performCommand(player.createCommandSourceStack().dispatcher().parse("gamerule sendCommandFeedback false",player.createCommandSourceStack() ), "this does nothing i think");
+            commandManager.performCommand(player.createCommandSourceStack().dispatcher().parse("execute at @s run particle minecraft:enchant ~ ~1.7 ~ .1 .1 .2 0.055 10 force",player.createCommandSourceStack() ), "this does nothing i think");
+
+            if(player.getMainHandItem().toString().equals("1 porcelainflowers:vinetomeitem")){
                 triggerAnim(player, GeoItem.getOrAssignId(player.getMainHandItem(), serverWorld ), "on_attack_controller", "open");
             }
             else{
                 triggerAnim(player, GeoItem.getOrAssignId(player.getOffhandItem(), serverWorld ), "on_attack_controller2", "open2");
             }
         }
+
+        //import net.minecraft.world.phys.HitResult;
+        HitResult target = player.pick(20, 0, true);
+
+        Vec3 pos = target.getLocation();
+        double x = pos.x();
+        double y = pos.y();
+        double z = pos.z();
+
+        //this summons the spike
+        level.addFreshEntity(new SpikeEntity(level, x, y, z, (float) y, 20, player));
+
+        Vec3 lookAngle = player.getLookAngle();
+        Vec3 adjustedAngle = lookAngle.add(player.getX(), player.getY(), player.getZ());
+
+        player.playSound(SoundEvents.ENCHANTMENT_TABLE_USE, 1, 1);
         player.awardStat(Stats.ITEM_USED.get(this));
-        finishUsingItem(this.getDefaultInstance(), level, player);
-        return ItemUtils.startUsingInstantly(level, player, hand);
+        return super.use(level, player, hand);
     }
+
 
     @Override
-    public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity user) {
-
-        return performAttack(stack, level, user);
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return this.cache;
     }
 
-    public ItemStack performAttack(ItemStack stack, Level level, LivingEntity user) {
-        if (user instanceof Player player) {
-            player.playSound(SoundEvents.VILLAGER_TRADE, 1, 1);
-            return stack;
-        }
-        return stack;
-    }
 }

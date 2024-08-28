@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import net.fabricmc.fabric.api.item.v1.CustomDamageHandler;
 import net.kuwulkid.porcelain.PorcelainFlowers;
 import net.kuwulkid.porcelain.blocks.ModBlocks;
+import net.kuwulkid.porcelain.item.custom.DeleterCubeItem;
 import net.kuwulkid.porcelain.item.custom.VineTomeItem;
 import net.kuwulkid.porcelain.item.custom.VorpalGemItem;
 import net.minecraft.core.Registry;
@@ -18,10 +19,12 @@ import java.util.Map;
 public class ModItems {
     public static final Map<ResourceLocation, Item> ITEMS = Maps.newLinkedHashMap();
 
-
-    public static final Item VORPAL_GEM = register("vorpal_gem", new VorpalGemItem(ModTiers.AMETHYST, new Item.Properties().durability(42).attributes(VorpalGemItem.createAttributes(Tiers.GOLD, 18, -2.4F)).rarity(Rarity.RARE)));
+    public static final Item VORPAL_GEM = register("vorpal_gem", new VorpalGemItem(ModTiers.AMETHYST, new Item.Properties().durability(42).attributes(VorpalGemItem.createAttributes(Tiers.GOLD, 19, -2.4F)).rarity(Rarity.RARE)));
 
     public static final Item VINE_TOME = register("vinetomeitem", new VineTomeItem(new Item.Properties()));
+
+    //used for testing purposes, from @Zeratul4340
+    public static final Item DELETER_CUBE = register("deleter_cube", new DeleterCubeItem(new Item.Properties()));
 
     public static Item registerBaseItem(String name) {
         return register(name, new Item(new Item.Properties()));

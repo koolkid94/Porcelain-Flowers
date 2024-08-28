@@ -18,7 +18,7 @@
 				{
 					"name": "right",
 					"parent": "whole",
-					"pivot": [1, 0, 0]
+					"pivot": [0.5, 5.5, -1.075]
 				},
 				{
 					"name": "flipping_page_right",
@@ -73,7 +73,7 @@
 				{
 					"name": "left",
 					"parent": "whole",
-					"pivot": [1, 5, -1.1]
+					"pivot": [0.5, 5.5, -1.075]
 				},
 				{
 					"name": "flipping_page_left",

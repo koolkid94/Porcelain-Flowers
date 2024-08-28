@@ -3,10 +3,12 @@ package net.kuwulkid.porcelain.entity;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricEntityTypeBuilder;
 import net.kuwulkid.porcelain.PorcelainFlowers;
 import net.kuwulkid.porcelain.entity.custom.JungleLaborerEntity;
+import net.kuwulkid.porcelain.entity.custom.SpikeEntity;
 import net.minecraft.core.Registry;
 import net.minecraft.world.entity.*;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.projectile.EvokerFangs;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.function.Supplier;
@@ -24,6 +26,13 @@ public class ModEntities {
                         .build()
         );
 
+    public static final EntityType<Entity> SPIKE = register(
+            "spike",
+            FabricEntityTypeBuilder.create()
+                    .entityFactory(SpikeEntity::new)
+                    .dimensions(EntityDimensions.scalable(1F, 2F))
+                    .build()
+    );
 
 
     @NotNull

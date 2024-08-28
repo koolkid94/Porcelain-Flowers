@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.client.rendering.v1.EntityRendererRegistry;
 import net.kuwulkid.porcelain.blocks.ModBlocks;
 import net.kuwulkid.porcelain.entity.ModEntities;
 import net.kuwulkid.porcelain.entity.client.JungleLaborerRenderer;
+import net.kuwulkid.porcelain.entity.client.SpikeRenderer;
 import software.bernie.geckolib.GeckoLib;
 import net.minecraft.client.renderer.RenderType;
 
@@ -18,5 +19,7 @@ public class PorcelainFlowersClient implements ClientModInitializer {
         );
 
         EntityRendererRegistry.register(ModEntities.JUNGLELABORER, JungleLaborerRenderer::new);
+        //EntityRendererRegistry.register(ModEntities.SPIKE, SpikeRenderer::new);
+
     }
 }
