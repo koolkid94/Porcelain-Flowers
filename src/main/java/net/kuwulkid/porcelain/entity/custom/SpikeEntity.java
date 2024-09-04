@@ -41,7 +41,8 @@ public class SpikeEntity extends Entity implements GeoEntity, TraceableEntity {
     }
 
     public SpikeEntity(Level level, double x, double y, double z, float yRot, int warmupDelay, LivingEntity owner) {
-        this(ModEntities.SPIKE, level);
+        super(EntityType.EVOKER_FANGS, level);
+        //this(ModEntities.SPIKE, level);
         this.warmupDelayTicks = warmupDelay;
         this.setOwner(owner);
         this.setYRot(yRot * (180.0F / (float)Math.PI));

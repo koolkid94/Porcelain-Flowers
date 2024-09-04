@@ -21,7 +21,7 @@ public class ModItems {
 
     public static final Item VORPAL_GEM = register("vorpal_gem", new VorpalGemItem(ModTiers.AMETHYST, new Item.Properties().durability(42).attributes(VorpalGemItem.createAttributes(Tiers.GOLD, 19, -2.4F)).rarity(Rarity.RARE)));
 
-    public static final Item VINE_TOME = register("vinetomeitem", new VineTomeItem(new Item.Properties()));
+    //public static final Item VINE_TOME = register("vinetomeitem", new VineTomeItem(new Item.Properties()));
 
     //used for testing purposes, from @Zeratul4340
     public static final Item DELETER_CUBE = register("deleter_cube", new DeleterCubeItem(new Item.Properties()));

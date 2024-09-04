@@ -1,7 +1,7 @@
 package net.kuwulkid.porcelain.item.custom;
 
 import net.kuwulkid.porcelain.client.renderer.item.VineTomeRenderer;
-import net.kuwulkid.porcelain.entity.custom.SpikeEntity;
+//import net.kuwulkid.porcelain.entity.custom.SpikeEntity;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.commands.Commands;
 import net.minecraft.core.BlockPos;
@@ -15,6 +15,7 @@ import net.minecraft.world.entity.LightningBolt;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.animal.Pig;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.projectile.EvokerFangs;
 import net.minecraft.world.item.BookItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -90,6 +91,8 @@ public final class VineTomeItem extends BookItem implements GeoItem {
 
     @Override
     public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
+        int cooldown = 120;
+        player.getCooldowns().addCooldown(this, cooldown);
         if (level instanceof ServerLevel serverWorld) {
             Commands commandManager = player.getServer().getCommands();
             commandManager.performCommand(player.createCommandSourceStack().dispatcher().parse("gamerule sendCommandFeedback false",player.createCommandSourceStack() ), "this does nothing i think");
@@ -112,7 +115,7 @@ public final class VineTomeItem extends BookItem implements GeoItem {
         double z = pos.z();
 
         //this summons the spike
-        level.addFreshEntity(new SpikeEntity(level, x, y, z, (float) y, 20, player));
+        level.addFreshEntity(new EvokerFangs(level, x, y, z, (float) y, 20, player));
 
         Vec3 lookAngle = player.getLookAngle();
         Vec3 adjustedAngle = lookAngle.add(player.getX(), player.getY(), player.getZ());

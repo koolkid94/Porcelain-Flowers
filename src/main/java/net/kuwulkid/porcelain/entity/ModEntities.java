@@ -26,13 +26,6 @@ public class ModEntities {
                         .build()
         );
 
-    public static final EntityType<Entity> SPIKE = register(
-            "spike",
-            FabricEntityTypeBuilder.create()
-                    .entityFactory(SpikeEntity::new)
-                    .dimensions(EntityDimensions.scalable(1F, 2F))
-                    .build()
-    );
 
 
     @NotNull
