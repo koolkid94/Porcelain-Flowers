@@ -2,7 +2,6 @@ package net.kuwulkid.porcelain.item;
 
 import com.google.common.base.Suppliers;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.tags.ItemTags;
 import net.minecraft.tags.TagKey;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.Tier;

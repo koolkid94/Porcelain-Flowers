@@ -1,15 +1,18 @@
 package net.kuwulkid.porcelain;
 
 import net.fabricmc.api.ModInitializer;
-
+import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
+import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
 import net.fabricmc.fabric.api.object.builder.v1.entity.FabricDefaultAttributeRegistry;
 import net.kuwulkid.porcelain.blocks.ModBlocks;
-import net.kuwulkid.porcelain.blocks.custom.BeachFernBlock;
 import net.kuwulkid.porcelain.entity.ModEntities;
 import net.kuwulkid.porcelain.entity.custom.JungleLaborerEntity;
 import net.kuwulkid.porcelain.item.ModItems;
-import net.kuwulkid.porcelain.world.gen.ModWorldGen;
+import net.kuwulkid.porcelain.world.feature.ModFeatures;
+import net.kuwulkid.porcelain.world.feature.ModPlacedFeatures;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.level.biome.Biomes;
+import net.minecraft.world.level.levelgen.GenerationStep;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,6 +24,8 @@ public class PorcelainFlowers implements ModInitializer {
 	public static final String MOD_ID = "porcelainflowers";
     public static final Logger LOGGER = LoggerFactory.getLogger(MOD_ID);
 
+
+
 	@Override
 	public void onInitialize() {
 		// This code runs as soon as Minecraft is in a mod-load-ready state.
@@ -31,15 +36,23 @@ public class PorcelainFlowers implements ModInitializer {
 		ModItems.registerModItems();
 		ModBlocks.registerModBlocks();
 		ModEntities.registerModEntities();
-		ModWorldGen.generateModWorldGen();
+		ModFeatures.init();
+		//FeatureConfiguration.init();
+
+
+		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.BEACH), GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.FERN_GROVE);
 
 		LOGGER.info("Hello thug...");
+
 
 
 		FabricDefaultAttributeRegistry.register(ModEntities.JUNGLELABORER, JungleLaborerEntity.createJungleLaborerAttributes());
 	}
 
+
+
 	public static ResourceLocation id(String path) {
 		return ResourceLocation.fromNamespaceAndPath(MOD_ID, path);
 	}
+
 }

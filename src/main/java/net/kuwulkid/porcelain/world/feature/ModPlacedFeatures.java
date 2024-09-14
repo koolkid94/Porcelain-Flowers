@@ -1,31 +1,34 @@
 package net.kuwulkid.porcelain.world.feature;
 
 import net.kuwulkid.porcelain.PorcelainFlowers;
-import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
-import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.data.worldgen.BootstrapContext;
+import net.minecraft.data.worldgen.placement.PlacementUtils;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.valueproviders.ConstantInt;
-import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.placement.*;
-import net.fabricmc.fabric.api.biome.v1.BiomeModifications;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectionContext;
-import net.fabricmc.fabric.api.biome.v1.BiomeSelectors;
-import net.kuwulkid.porcelain.world.feature.ModPlacedFeatures;
-import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.level.biome.Biomes;
-import net.minecraft.world.level.chunk.status.ChunkStep;
-import net.minecraft.world.level.levelgen.GenerationStep;
-import net.minecraft.world.level.levelgen.GenerationStep.Decoration;
-import net.minecraft.data.worldgen.placement.PlacementUtils;
 
 import java.util.List;
 
-
 public class ModPlacedFeatures {
-    public static void init() { }
+    public static final ResourceKey<PlacedFeature> FERN_GROVE = registerPlacedFeature("fern_grove");
+
+    public static void bootstrap(BootstrapContext<PlacedFeature> bootstrapContext) {
+        HolderGetter<ConfiguredFeature<?, ?>> holderGetter = bootstrapContext.lookup(Registries.CONFIGURED_FEATURE);
+        PlacementUtils.register(bootstrapContext, FERN_GROVE, holderGetter.getOrThrow(ModConfiguredFeatures.FERN_GROVE), CountPlacement.of(UniformInt.of(2, 3)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
+
+    }
+
+
+    public static ResourceKey<PlacedFeature> registerPlacedFeature(String id) {
+        return ResourceKey.create(Registries.PLACED_FEATURE, ResourceLocation.fromNamespaceAndPath(PorcelainFlowers.MOD_ID, id));
+    }
+
+    private static List<PlacementModifier> orePlacement(PlacementModifier modifier, PlacementModifier modifier2) {
+        return List.of(modifier, InSquarePlacement.spread(), modifier2, BiomeFilter.biome());
+    }
 
 }

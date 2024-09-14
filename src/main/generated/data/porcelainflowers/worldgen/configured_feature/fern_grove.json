@@ -1,0 +1,47 @@
+{
+  "type": "porcelainflowers:fern_grove",
+  "config": {
+    "feature": {
+      "feature": {
+        "type": "minecraft:simple_block",
+        "config": {
+          "to_place": {
+            "type": "minecraft:simple_state_provider",
+            "state": {
+              "Name": "porcelainflowers:beach_fern"
+            }
+          }
+        }
+      },
+      "placement": [
+        {
+          "type": "minecraft:block_predicate_filter",
+          "predicate": {
+            "type": "minecraft:all_of",
+            "predicates": [
+              {
+                "type": "minecraft:replaceable"
+              },
+              {
+                "type": "minecraft:matching_fluids",
+                "fluids": "minecraft:empty"
+              },
+              {
+                "type": "minecraft:matching_blocks",
+                "blocks": "minecraft:sand",
+                "offset": [
+                  0,
+                  -1,
+                  0
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "tries": 4,
+    "xz_spread": 6,
+    "y_spread": 6
+  }
+}
