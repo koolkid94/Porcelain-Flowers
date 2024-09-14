@@ -1,0 +1,12 @@
+{
+  "type": "porcelainflowers:fallen_tree",
+  "config": {
+    "blockID": {
+      "Name": "minecraft:oak_log",
+      "Properties": {
+        "axis": "y"
+      }
+    },
+    "number": 1
+  }
+}

@@ -16,9 +16,13 @@ import java.util.List;
 public class ModPlacedFeatures {
     public static final ResourceKey<PlacedFeature> FERN_GROVE = registerPlacedFeature("fern_grove");
 
+    public static final ResourceKey<PlacedFeature> FALLEN_TREE = registerPlacedFeature("fallen_tree");
+
     public static void bootstrap(BootstrapContext<PlacedFeature> bootstrapContext) {
         HolderGetter<ConfiguredFeature<?, ?>> holderGetter = bootstrapContext.lookup(Registries.CONFIGURED_FEATURE);
         PlacementUtils.register(bootstrapContext, FERN_GROVE, holderGetter.getOrThrow(ModConfiguredFeatures.FERN_GROVE), CountPlacement.of(UniformInt.of(2, 3)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
+        PlacementUtils.register(bootstrapContext, FALLEN_TREE, holderGetter.getOrThrow(ModConfiguredFeatures.FALLEN_TREE), InSquarePlacement.spread(), CountPlacement.of(UniformInt.of(12, 12)), PlacementUtils.HEIGHTMAP);
+
 
     }
 

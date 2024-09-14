@@ -2,6 +2,7 @@ package net.kuwulkid.porcelain.world.feature;
 
 import net.kuwulkid.porcelain.PorcelainFlowers;
 import net.kuwulkid.porcelain.blocks.ModBlocks;
+import net.kuwulkid.porcelain.world.feature.test.FallenTreeFeatureConfig;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -21,6 +22,7 @@ import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvi
 
 public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERN_GROVE = registerConfiguredFeature("fern_grove");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_TREE = registerConfiguredFeature("fallen_tree");
 
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> bootstrapContext) {
@@ -39,6 +41,16 @@ public class ModConfiguredFeatures {
                                 new SimpleBlockConfiguration(BlockStateProvider.simple(ModBlocks.BEACH_FERN)),
                                 BlockPredicate.allOf(BlockPredicate.replaceable(), BlockPredicate.noFluid(), BlockPredicate.matchesBlocks(Direction.DOWN.getNormal(), Blocks.SAND))
                         )
+                )
+        );
+
+        FeatureUtils.register(
+                bootstrapContext,
+                FALLEN_TREE,
+                ModFeatures.FALLEN_TREE,
+                new FallenTreeFeatureConfig(
+                        1,
+                        Blocks.OAK_LOG.defaultBlockState()
                 )
         );
 

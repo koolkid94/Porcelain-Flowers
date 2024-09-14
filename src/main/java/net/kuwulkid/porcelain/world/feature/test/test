@@ -1,0 +1,50 @@
+ if(getRandomBoolean()) //determines if decorated or not
+                    {
+                        if(getRandomBoolean()){//determines if decorated w/ moss or mushroom
+                            world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                            world.setBlock(testPos.above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
+                            world.blockUpdated(testPos, Blocks.OAK_LOG);
+
+                            world.setBlock(testPos.north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                            world.setBlock(testPos.north().above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
+                            world.blockUpdated(testPos.north(), Blocks.OAK_LOG);
+
+                            world.setBlock(testPos.north().north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                            world.setBlock(testPos.north(2).above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
+                            world.blockUpdated(testPos.north().north(), Blocks.OAK_LOG);
+                            return true;
+                        }
+
+                        else{ //mushroom
+                            world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                            if(getRandomBoolean()){
+                                world.setBlock(testPos.above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
+                            }
+                            world.blockUpdated(testPos, Blocks.OAK_LOG);
+
+                            world.setBlock(testPos.north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                            if(getRandomBoolean()){
+                                world.setBlock(testPos.north().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
+                            }
+                            world.blockUpdated(testPos.north(), Blocks.OAK_LOG);
+
+                            world.setBlock(testPos.north().north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                            if(getRandomBoolean()){
+                                world.setBlock(testPos.north().north().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
+                            }
+                            world.blockUpdated(testPos.north().north(), Blocks.OAK_LOG);
+                            return true;
+                        }
+
+                    }
+                    else{
+                        world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                        world.blockUpdated(testPos, Blocks.OAK_LOG);
+
+                        world.setBlock(testPos.north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                        world.blockUpdated(testPos.north(), Blocks.OAK_LOG);
+
+                        world.setBlock(testPos.north().north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                        world.blockUpdated(testPos.north().north(), Blocks.OAK_LOG);
+                        return true;
+                    }

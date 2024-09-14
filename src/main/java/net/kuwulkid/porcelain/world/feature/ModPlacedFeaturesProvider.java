@@ -17,6 +17,7 @@ public class ModPlacedFeaturesProvider extends FabricDynamicRegistryProvider {
     @Override
     protected void configure(HolderLookup.Provider registries, Entries entries) {
         add(registries, entries, ModPlacedFeatures.FERN_GROVE);
+        add(registries, entries, ModPlacedFeatures.FALLEN_TREE);
 
     }
 
