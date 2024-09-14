@@ -8,6 +8,7 @@ import net.kuwulkid.porcelain.blocks.ModBlocks;
 import net.kuwulkid.porcelain.entity.ModEntities;
 import net.kuwulkid.porcelain.entity.custom.JungleLaborerEntity;
 import net.kuwulkid.porcelain.item.ModItems;
+import net.kuwulkid.porcelain.stuffs.ModInventoryTab;
 import net.kuwulkid.porcelain.world.feature.ModFeatures;
 import net.kuwulkid.porcelain.world.feature.ModPlacedFeatures;
 import net.minecraft.resources.ResourceLocation;
@@ -38,6 +39,7 @@ public class PorcelainFlowers implements ModInitializer {
 		ModEntities.registerModEntities();
 		ModFeatures.init();
 		//FeatureConfiguration.init();
+		ModInventoryTab.initThuglyTab();
 
 
 		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.BEACH), GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.FERN_GROVE);

@@ -1,6 +1,6 @@
 package net.kuwulkid.porcelain.client.renderer.item;
 import net.kuwulkid.porcelain.PorcelainFlowers;
-import net.kuwulkid.porcelain.item.custom.VineTomeItem;
+import net.kuwulkid.porcelain.item.custom.unused.VineTomeItem;
 import software.bernie.geckolib.model.DefaultedItemGeoModel;
 import software.bernie.geckolib.renderer.GeoItemRenderer;
 

@@ -12,7 +12,8 @@ public class PorcelainFlowersClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
         BlockRenderLayerMap.INSTANCE.putBlocks(RenderType.cutout(),
-                ModBlocks.BEACH_FERN
+                ModBlocks.BEACH_FERN,
+                ModBlocks.ARTIFACT_ALTAR
         );
 
         EntityRendererRegistry.register(ModEntities.JUNGLELABORER, JungleLaborerRenderer::new);

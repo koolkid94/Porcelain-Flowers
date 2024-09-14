@@ -1,4 +1,4 @@
-package net.kuwulkid.porcelain.item.custom;
+package net.kuwulkid.porcelain.item.custom.unused;
 
 import net.kuwulkid.porcelain.client.renderer.item.DeleterCubeRenderer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;

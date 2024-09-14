@@ -14,13 +14,17 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.tslat.smartbrainlib.api.SmartBrainOwner;
+import net.tslat.smartbrainlib.api.core.sensor.ExtendedSensor;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoEntity;
 import software.bernie.geckolib.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animation.*;
 import software.bernie.geckolib.util.GeckoLibUtil;
 
-public class JungleLaborerEntity extends Animal implements GeoEntity{
+import java.util.List;
+
+public class JungleLaborerEntity extends Animal implements GeoEntity, SmartBrainOwner {
     int output, numOne = 0, numTwo = 4;
     protected static final RawAnimation WALK_ANIM = RawAnimation.begin().thenLoop("animation.villager.walk");
     protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("animation.villager.idle");
@@ -89,5 +93,10 @@ public class JungleLaborerEntity extends Animal implements GeoEntity{
     @Override
     public AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
         return null;
+    }
+
+    @Override
+    public List<? extends ExtendedSensor> getSensors() {
+        return List.of();
     }
 }

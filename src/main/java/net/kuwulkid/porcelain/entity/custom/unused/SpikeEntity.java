@@ -1,4 +1,4 @@
-package net.kuwulkid.porcelain.entity.custom;
+package net.kuwulkid.porcelain.entity.custom.unused;
 
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.nbt.CompoundTag;
