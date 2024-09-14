@@ -2,7 +2,6 @@ package net.kuwulkid.porcelain.entity.client;
 
 import net.kuwulkid.porcelain.PorcelainFlowers;
 import net.kuwulkid.porcelain.entity.custom.JungleLaborerEntity;
-//import net.minecraft.util.Identifier;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib.animation.AnimationState;
 import software.bernie.geckolib.constant.DataTickets;
