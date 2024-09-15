@@ -168,7 +168,7 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig>
             }
         }
         //fallback
-        System.out.println("FAILED TO PLACE");
+        //System.out.println("FAILED TO PLACE");
         return false;
     }
 
