@@ -68,7 +68,7 @@ public class ArtifactAltarBlockEntity extends BaseContainerBlockEntity implement
 
     @Override
     protected AbstractContainerMenu createMenu(int containerId, Inventory inventory) {
-        return ChestMenu.oneRow(containerId, inventory);
+        return ChestMenu.threeRows(containerId, inventory);
     }
 
     @Override

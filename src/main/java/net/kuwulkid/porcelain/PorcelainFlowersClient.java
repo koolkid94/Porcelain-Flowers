@@ -17,6 +17,7 @@ public class PorcelainFlowersClient implements ClientModInitializer {
         );
 
         EntityRendererRegistry.register(ModEntities.JUNGLELABORER, JungleLaborerRenderer::new);
+
         //EntityRendererRegistry.register(ModEntities.SPIKE, SpikeRenderer::new);
 
     }

@@ -47,7 +47,7 @@ import software.bernie.geckolib.util.GeckoLibUtil;
 
 import java.util.List;
 
-public class JungleLaborerEntity extends Animal implements GeoEntity {
+public class JungleLaborerEntity extends Mob implements GeoEntity{
     int output, numOne = 0, numTwo = 4;
     protected static final RawAnimation WALK_ANIM = RawAnimation.begin().thenLoop("animation.villager.walk");
     protected static final RawAnimation IDLE_ANIM = RawAnimation.begin().thenLoop("animation.villager.idle");
@@ -58,10 +58,6 @@ public class JungleLaborerEntity extends Animal implements GeoEntity {
         super(entityType, world);
     }
 
-    @Override
-    public boolean isFood(ItemStack stack) {
-        return false;
-    }
 
     public static AttributeSupplier.Builder createJungleLaborerAttributes(){
         return Mob.createMobAttributes()
@@ -131,8 +127,6 @@ public class JungleLaborerEntity extends Animal implements GeoEntity {
         return null;
     }
 
-    @Override
-    public @Nullable AgeableMob getBreedOffspring(ServerLevel level, AgeableMob otherParent) {
-        return null;
-    }
+
+
 }
