@@ -6,16 +6,15 @@ import net.minecraft.core.Direction;
 import net.minecraft.data.models.blockstates.VariantProperties;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.util.RandomSource;
+import net.minecraft.util.valueproviders.IntProvider;
 import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.WorldGenLevel;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.HorizontalDirectionalBlock;
-import net.minecraft.world.level.block.RotatedPillarBlock;
-import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
+import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
 import java.awt.image.TileObserver;
 import java.util.Random;
@@ -24,157 +23,79 @@ import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
 public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig>
 {
-    int rand = (int) ((15 - 1 + 1) * Math.random() + 1);
-//yes i realise how hardcoded this is
 
-    public FallenTreeFeature(Codec<FallenTreeFeatureConfig> codec) {
+    public final Block woodType;
+    public final int length;
+
+
+    public FallenTreeFeature(Codec<FallenTreeFeatureConfig> codec, Block woodType, int length) {
         super(codec);
+        this.woodType = woodType;
+        this.length = length;
+        //so i have the configuration done through the "FallenTreeFeature" constructor, when i think its *supposed to* be handled through the "FallenTreeFeatureConfig" class
+        //so this means that the generated "fallen_tree.json" in the configured_feature tab does less than i think, though it *may* handle how frequently it spawns, idk
     }
+
 
     @Override
     public boolean place(FeaturePlaceContext<FallenTreeFeatureConfig> context) {
         BlockPos origin = context.origin();
         WorldGenLevel world = context.level();
-        //world.setBlock(pos, Blocks.OAK_LOG.defaultBlockState(), 0x10);
-
 
         // find the surface of the world
-        BlockPos testPos = new BlockPos(origin);
-        BlockPos thug = new BlockPos(origin);
-        int x = thug.getX() + rand;
-        int y = thug.getY() + rand;
-        int z = thug.getZ() + rand;
+        BlockPos placement = new BlockPos(origin);
+        Block placedBlock = this.woodType;
+        int logLength = this.length;
 
-        //testPos = testPos.offset(x, y ,z);
-
-
-        //increments testPos to be one up
-        // the tag name is dirt, but includes grass, mud, podzol, etc.
-        //reduces spawn chances
-        if(getRandomBoolean()){
-            if(getRandomBoolean()){
-                if(getRandomBoolean()){
-                    if (world.getBlockState(testPos.above()).is(Blocks.AIR) && world.getBlockState(testPos.below()).is(BlockTags.DIRT)) {
-                        if(getRandomBoolean())// determines facing eastwest/northsouth
-                        {
-                            if(getRandomBoolean()) //determines if decorated or not
-                            {
-                                if(getRandomBoolean()){//determines if decorated w/ moss or mushroom
-                                    world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                                    world.setBlock(testPos.above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
-                                    world.blockUpdated(testPos, Blocks.OAK_LOG);
-
-                                    world.setBlock(testPos.west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                                    world.setBlock(testPos.west().above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
-                                    world.blockUpdated(testPos.west(), Blocks.OAK_LOG);
-
-                                    world.setBlock(testPos.west().west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                                    world.setBlock(testPos.west(2).above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
-                                    world.blockUpdated(testPos.west().west(), Blocks.OAK_LOG);
-                                    return true;
-                                }
-
-                                else{ //lichen
-                                    world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                                    if(getRandomBoolean()){
-                                        world.setBlock(testPos.above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
-                                    }
-                                    world.blockUpdated(testPos, Blocks.OAK_LOG);
-
-                                    world.setBlock(testPos.west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                                    if(getRandomBoolean()){
-                                        world.setBlock(testPos.west().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
-                                    }
-                                    world.blockUpdated(testPos.west(), Blocks.OAK_LOG);
-
-                                    world.setBlock(testPos.west().west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                                    if(getRandomBoolean()){
-                                        world.setBlock(testPos.west().west().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
-                                    }
-                                    world.blockUpdated(testPos.west().west(), Blocks.OAK_LOG);
-                                    return true;
-                                }
-
-                            }
-                            else{
-                                world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                                world.blockUpdated(testPos, Blocks.OAK_LOG);
-
-                                world.setBlock(testPos.west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                                world.blockUpdated(testPos.west(), Blocks.OAK_LOG);
-
-                                world.setBlock(testPos.west().west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                                world.blockUpdated(testPos.west().west(), Blocks.OAK_LOG);
-                                return true;
-                            }
-                        }
-                        else //northsouth
-                        {
-                            if(getRandomBoolean()) //determines if decorated or not
-                            {
-                                if(getRandomBoolean()){//determines if decorated w/ moss or mushroom
-                                    world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                                    world.setBlock(testPos.above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
-                                    world.blockUpdated(testPos, Blocks.OAK_LOG);
-
-                                    world.setBlock(testPos.north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                                    world.setBlock(testPos.north().above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
-                                    world.blockUpdated(testPos.north(), Blocks.OAK_LOG);
-
-                                    world.setBlock(testPos.north().north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                                    world.setBlock(testPos.north(2).above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
-                                    world.blockUpdated(testPos.north().north(), Blocks.OAK_LOG);
-                                    return true;
-                                }
-
-                                else{ //mushroom
-                                    world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                                    if(getRandomBoolean()){
-                                        world.setBlock(testPos.above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
-                                    }
-                                    world.blockUpdated(testPos, Blocks.OAK_LOG);
-
-                                    world.setBlock(testPos.north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                                    if(getRandomBoolean()){
-                                        world.setBlock(testPos.north().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
-                                    }
-                                    world.blockUpdated(testPos.north(), Blocks.OAK_LOG);
-
-                                    world.setBlock(testPos.north().north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                                    if(getRandomBoolean()){
-                                        world.setBlock(testPos.north().north().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
-                                    }
-                                    world.blockUpdated(testPos.north().north(), Blocks.OAK_LOG);
-                                    return true;
-                                }
-
-                            }
-                            else{
-                                world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                                world.blockUpdated(testPos, Blocks.OAK_LOG);
-
-                                world.setBlock(testPos.north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                                world.blockUpdated(testPos.north(), Blocks.OAK_LOG);
-
-                                world.setBlock(testPos.north().north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                                world.blockUpdated(testPos.north().north(), Blocks.OAK_LOG);
-                                return true;
-                            }
-                        }
-
-
-                    }
-                }
+        if (world.getBlockState(placement.above()).is(Blocks.AIR) && world.getBlockState(placement.below()).is(BlockTags.DIRT)) /*makes sure the start of the fallen tree's blocks are generated sandwiched between dirt and air, so the surface*/ {
+            if (getRandomBoolean()) {//ns or ew
+                dothelogNS(world, placement, placedBlock, logLength);
+                return true;
+            } else {
+                dothelogEW(world, placement, placedBlock, logLength);
+                return true;
             }
         }
-        //fallback
-        //System.out.println("FAILED TO PLACE");
         return false;
+
     }
 
     public boolean getRandomBoolean() {
         Random random = new Random();
         return random.nextBoolean();
+        //source of randomness
+    }
+
+    public void dothelogNS(WorldGenLevel world, BlockPos placement, Block placedBlock, int logLength){
+        for (int i = 0; i < logLength; )
+        {
+            if(world.getBlockState(placement.west(logLength)).is(BlockTags.REPLACEABLE) && world.getBlockState(placement.west(logLength).below()).is(BlockTags.DIRT)) //final check to make sure the log is not boring into a hillside, disable this if you want
+            {
+                if (getRandomBoolean()) { //mossy
+                    world.setBlock(placement.west(i), placedBlock.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                    world.setBlock(placement.west(i).above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
+                } else { //bare
+                    world.setBlock(placement.west(i), placedBlock.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                }
+            }
+            i++;
+        }
+    }
+
+    public void dothelogEW(WorldGenLevel world, BlockPos placement, Block placedBlock, int logLength){
+        for (int i = 0; i < logLength; )
+        {
+            if(world.getBlockState(placement.north(logLength)).is(BlockTags.REPLACEABLE) && world.getBlockState(placement.north(logLength).below()).is(BlockTags.DIRT)){ //final check to make sure the log is not boring into a hillside, disable this if you want
+                //the second qualifier ensures that the log doesnt generate over air, so its not floating
+                if (getRandomBoolean()) { //mossy
+                    world.setBlock(placement.north(i), placedBlock.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
+                    world.setBlock(placement.north(i).above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
+                } else { //bare
+                    world.setBlock(placement.north(i), placedBlock.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
+                }
+            }
+            i++;
+        }
     }
 
 

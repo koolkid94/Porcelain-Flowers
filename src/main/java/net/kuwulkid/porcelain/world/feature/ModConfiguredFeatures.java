@@ -51,6 +51,7 @@ public class ModConfiguredFeatures {
                 new FallenTreeFeatureConfig(
                         1,
                         Blocks.OAK_LOG.defaultBlockState()
+                        //noclue what this oak log here does tbh
                 )
         );
 
