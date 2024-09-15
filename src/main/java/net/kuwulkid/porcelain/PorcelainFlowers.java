@@ -49,7 +49,7 @@ public class PorcelainFlowers implements ModInitializer {
 		LOGGER.info("Hello thug...");
 
 
-		FabricDefaultAttributeRegistry.register(ModEntities.JUNGLELABORER, JungleLaborerEntity.createJungleLaborerAttributes());
+		//FabricDefaultAttributeRegistry.register(ModEntities.JUNGLELABORER, JungleLaborerEntity.createJungleLaborerAttributes());
 	}
 
 

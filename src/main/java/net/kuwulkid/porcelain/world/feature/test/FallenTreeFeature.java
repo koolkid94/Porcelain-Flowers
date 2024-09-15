@@ -175,7 +175,6 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig>
     public boolean getRandomBoolean() {
         Random random = new Random();
         return random.nextBoolean();
-        //this controls the decorator type
     }
 
 

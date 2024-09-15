@@ -28,7 +28,7 @@ public class ModItems {
     public static final Item HUNGERING_SCYTHE = register("hungering_scythe", new HungeringScytheItem(ModTiers.COPPER, new Item.Properties().durability(128).
             attributes(HungeringScytheItem.createAttributes(Tiers.IRON, 4, -3.4F)).rarity(Rarity.EPIC)));
 
-    public static final Item JUNGLE_LABORER_SPAWN_EGG = registerItem("jungle_laborer_spawn_egg", new SpawnEggItem(ModEntities.JUNGLELABORER, 8459049, 2368710, new Item.Properties()));
+    //public static final Item JUNGLE_LABORER_SPAWN_EGG = registerItem("jungle_laborer_spawn_egg", new SpawnEggItem(ModEntities.JUNGLELABORER, 8459049, 2368710, new Item.Properties()));
 
     //public static final Item VINE_TOME = register("vinetomeitem", new VineTomeItem(new Item.Properties()));
 

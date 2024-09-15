@@ -16,7 +16,7 @@ public class PorcelainFlowersClient implements ClientModInitializer {
                 ModBlocks.ARTIFACT_ALTAR
         );
 
-        EntityRendererRegistry.register(ModEntities.JUNGLELABORER, JungleLaborerRenderer::new);
+        //EntityRendererRegistry.register(ModEntities.JUNGLELABORER, JungleLaborerRenderer::new);
 
         //EntityRendererRegistry.register(ModEntities.SPIKE, SpikeRenderer::new);
 

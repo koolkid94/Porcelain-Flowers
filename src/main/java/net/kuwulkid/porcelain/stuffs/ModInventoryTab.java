@@ -31,7 +31,7 @@ public class ModInventoryTab {
                     output.accept(ModItems.HUNGERING_SCYTHE);
                     output.accept(ModBlocks.ARTIFACT_ALTAR);
                     output.accept(ModBlocks.BEACH_FERN);
-                    output.accept(ModItems.JUNGLE_LABORER_SPAWN_EGG);
+                    //output.accept(ModItems.JUNGLE_LABORER_SPAWN_EGG);
                     //this is the order the items will appear in within the tab, be mindful
 
                 }).build());

@@ -15,13 +15,13 @@ public class ModEntities {
         PorcelainFlowers.LOGGER.info("Registering Entities for " + PorcelainFlowers.MOD_ID);
     }
 
-        public static final EntityType<JungleLaborerEntity> JUNGLELABORER = register(
+        /* public static final EntityType<JungleLaborerEntity> JUNGLELABORER = register(
                 "junglelaborer",
                 FabricEntityTypeBuilder.createMob()
                         .entityFactory(JungleLaborerEntity::new)
                         .dimensions(EntityDimensions.scalable(1F, 2F))
                         .build()
-        );
+        ); */
 
 
 
