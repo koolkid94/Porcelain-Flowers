@@ -14,6 +14,7 @@ import net.kuwulkid.porcelain.world.feature.ModPlacedFeatures;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.level.biome.Biomes;
 import net.minecraft.world.level.levelgen.GenerationStep;
+import net.minecraft.world.level.levelgen.structure.placement.StructurePlacement;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,7 +44,7 @@ public class PorcelainFlowers implements ModInitializer {
 
 
 		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.BEACH), GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.FERN_GROVE);
-		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.FOREST), GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.FALLEN_TREE);
+		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.FOREST), GenerationStep.Decoration.TOP_LAYER_MODIFICATION, ModPlacedFeatures.FALLEN_TREE);
 
 		LOGGER.info("Hello thug...");
 

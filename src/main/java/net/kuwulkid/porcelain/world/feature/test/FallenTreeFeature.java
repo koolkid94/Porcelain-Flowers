@@ -48,128 +48,128 @@ public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig>
         //testPos = testPos.offset(x, y ,z);
 
 
-            //increments testPos to be one up
-            // the tag name is dirt, but includes grass, mud, podzol, etc.
+        //increments testPos to be one up
+        // the tag name is dirt, but includes grass, mud, podzol, etc.
         //reduces spawn chances
-if(getRandomBoolean()){
-    if(getRandomBoolean()){
         if(getRandomBoolean()){
-            if (world.getBlockState(testPos.above()).is(Blocks.AIR) && world.getBlockState(testPos.below()).is(BlockTags.DIRT)) {
-                if(getRandomBoolean())// determines facing eastwest/northsouth
-                {
-                    if(getRandomBoolean()) //determines if decorated or not
-                    {
-                        if(getRandomBoolean()){//determines if decorated w/ moss or mushroom
-                            world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                            world.setBlock(testPos.above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
-                            world.blockUpdated(testPos, Blocks.OAK_LOG);
+            if(getRandomBoolean()){
+                if(getRandomBoolean()){
+                    if (world.getBlockState(testPos.above()).is(Blocks.AIR) && world.getBlockState(testPos.below()).is(BlockTags.DIRT)) {
+                        if(getRandomBoolean())// determines facing eastwest/northsouth
+                        {
+                            if(getRandomBoolean()) //determines if decorated or not
+                            {
+                                if(getRandomBoolean()){//determines if decorated w/ moss or mushroom
+                                    world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                                    world.setBlock(testPos.above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
+                                    world.blockUpdated(testPos, Blocks.OAK_LOG);
 
-                            world.setBlock(testPos.west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                            world.setBlock(testPos.west().above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
-                            world.blockUpdated(testPos.west(), Blocks.OAK_LOG);
+                                    world.setBlock(testPos.west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                                    world.setBlock(testPos.west().above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
+                                    world.blockUpdated(testPos.west(), Blocks.OAK_LOG);
 
-                            world.setBlock(testPos.west().west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                            world.setBlock(testPos.west(2).above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
-                            world.blockUpdated(testPos.west().west(), Blocks.OAK_LOG);
-                            return true;
+                                    world.setBlock(testPos.west().west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                                    world.setBlock(testPos.west(2).above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
+                                    world.blockUpdated(testPos.west().west(), Blocks.OAK_LOG);
+                                    return true;
+                                }
+
+                                else{ //lichen
+                                    world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                                    if(getRandomBoolean()){
+                                        world.setBlock(testPos.above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
+                                    }
+                                    world.blockUpdated(testPos, Blocks.OAK_LOG);
+
+                                    world.setBlock(testPos.west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                                    if(getRandomBoolean()){
+                                        world.setBlock(testPos.west().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
+                                    }
+                                    world.blockUpdated(testPos.west(), Blocks.OAK_LOG);
+
+                                    world.setBlock(testPos.west().west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                                    if(getRandomBoolean()){
+                                        world.setBlock(testPos.west().west().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
+                                    }
+                                    world.blockUpdated(testPos.west().west(), Blocks.OAK_LOG);
+                                    return true;
+                                }
+
+                            }
+                            else{
+                                world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                                world.blockUpdated(testPos, Blocks.OAK_LOG);
+
+                                world.setBlock(testPos.west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                                world.blockUpdated(testPos.west(), Blocks.OAK_LOG);
+
+                                world.setBlock(testPos.west().west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
+                                world.blockUpdated(testPos.west().west(), Blocks.OAK_LOG);
+                                return true;
+                            }
+                        }
+                        else //northsouth
+                        {
+                            if(getRandomBoolean()) //determines if decorated or not
+                            {
+                                if(getRandomBoolean()){//determines if decorated w/ moss or mushroom
+                                    world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
+                                    world.setBlock(testPos.above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
+                                    world.blockUpdated(testPos, Blocks.OAK_LOG);
+
+                                    world.setBlock(testPos.north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
+                                    world.setBlock(testPos.north().above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
+                                    world.blockUpdated(testPos.north(), Blocks.OAK_LOG);
+
+                                    world.setBlock(testPos.north().north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
+                                    world.setBlock(testPos.north(2).above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
+                                    world.blockUpdated(testPos.north().north(), Blocks.OAK_LOG);
+                                    return true;
+                                }
+
+                                else{ //mushroom
+                                    world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
+                                    if(getRandomBoolean()){
+                                        world.setBlock(testPos.above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
+                                    }
+                                    world.blockUpdated(testPos, Blocks.OAK_LOG);
+
+                                    world.setBlock(testPos.north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
+                                    if(getRandomBoolean()){
+                                        world.setBlock(testPos.north().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
+                                    }
+                                    world.blockUpdated(testPos.north(), Blocks.OAK_LOG);
+
+                                    world.setBlock(testPos.north().north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
+                                    if(getRandomBoolean()){
+                                        world.setBlock(testPos.north().north().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
+                                    }
+                                    world.blockUpdated(testPos.north().north(), Blocks.OAK_LOG);
+                                    return true;
+                                }
+
+                            }
+                            else{
+                                world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
+                                world.blockUpdated(testPos, Blocks.OAK_LOG);
+
+                                world.setBlock(testPos.north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
+                                world.blockUpdated(testPos.north(), Blocks.OAK_LOG);
+
+                                world.setBlock(testPos.north().north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
+                                world.blockUpdated(testPos.north().north(), Blocks.OAK_LOG);
+                                return true;
+                            }
                         }
 
-                        else{ //lichen
-                            world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                            if(getRandomBoolean()){
-                                world.setBlock(testPos.above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
-                            }
-                            world.blockUpdated(testPos, Blocks.OAK_LOG);
 
-                            world.setBlock(testPos.west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                            if(getRandomBoolean()){
-                                world.setBlock(testPos.west().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
-                            }
-                            world.blockUpdated(testPos.west(), Blocks.OAK_LOG);
-
-                            world.setBlock(testPos.west().west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                            if(getRandomBoolean()){
-                                world.setBlock(testPos.west().west().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
-                            }
-                            world.blockUpdated(testPos.west().west(), Blocks.OAK_LOG);
-                            return true;
-                        }
-
-                    }
-                    else{
-                        world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                        world.blockUpdated(testPos, Blocks.OAK_LOG);
-
-                        world.setBlock(testPos.west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                        world.blockUpdated(testPos.west(), Blocks.OAK_LOG);
-
-                        world.setBlock(testPos.west().west(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.X)), 0x10);
-                        world.blockUpdated(testPos.west().west(), Blocks.OAK_LOG);
-                        return true;
                     }
                 }
-                else //northsouth
-                {
-                    if(getRandomBoolean()) //determines if decorated or not
-                    {
-                        if(getRandomBoolean()){//determines if decorated w/ moss or mushroom
-                            world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                            world.setBlock(testPos.above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
-                            world.blockUpdated(testPos, Blocks.OAK_LOG);
-
-                            world.setBlock(testPos.north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                            world.setBlock(testPos.north().above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
-                            world.blockUpdated(testPos.north(), Blocks.OAK_LOG);
-
-                            world.setBlock(testPos.north().north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                            world.setBlock(testPos.north(2).above(), Blocks.MOSS_CARPET.defaultBlockState(), 0x10);
-                            world.blockUpdated(testPos.north().north(), Blocks.OAK_LOG);
-                            return true;
-                        }
-
-                        else{ //mushroom
-                            world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                            if(getRandomBoolean()){
-                                world.setBlock(testPos.above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
-                            }
-                            world.blockUpdated(testPos, Blocks.OAK_LOG);
-
-                            world.setBlock(testPos.north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                            if(getRandomBoolean()){
-                                world.setBlock(testPos.north().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
-                            }
-                            world.blockUpdated(testPos.north(), Blocks.OAK_LOG);
-
-                            world.setBlock(testPos.north().north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                            if(getRandomBoolean()){
-                                world.setBlock(testPos.north().north().above(), Blocks.RED_MUSHROOM.defaultBlockState(), 0x10);
-                            }
-                            world.blockUpdated(testPos.north().north(), Blocks.OAK_LOG);
-                            return true;
-                        }
-
-                    }
-                    else{
-                        world.setBlock(testPos, Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                        world.blockUpdated(testPos, Blocks.OAK_LOG);
-
-                        world.setBlock(testPos.north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                        world.blockUpdated(testPos.north(), Blocks.OAK_LOG);
-
-                        world.setBlock(testPos.north().north(), Blocks.OAK_LOG.defaultBlockState().setValue(RotatedPillarBlock.AXIS, (Direction.Axis.Z)), 0x10);
-                        world.blockUpdated(testPos.north().north(), Blocks.OAK_LOG);
-                        return true;
-                    }
-                }
-
-
             }
         }
-    }
-}
-                //fallback
-System.out.println("FAILED TO PLACE");
-        return true;
+        //fallback
+        System.out.println("FAILED TO PLACE");
+        return false;
     }
 
     public boolean getRandomBoolean() {
@@ -180,4 +180,3 @@ System.out.println("FAILED TO PLACE");
 
 
 }
-

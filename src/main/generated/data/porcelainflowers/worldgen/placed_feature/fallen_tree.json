@@ -2,15 +2,9 @@
   "feature": "porcelainflowers:fallen_tree",
   "placement": [
     {
-      "type": "minecraft:in_square"
-    },
-    {
-      "type": "minecraft:count",
-      "count": {
-        "type": "minecraft:uniform",
-        "max_inclusive": 12,
-        "min_inclusive": 12
-      }
+      "type": "minecraft:random_offset",
+      "xz_spread": 0,
+      "y_spread": 13
     },
     {
       "type": "minecraft:heightmap",
