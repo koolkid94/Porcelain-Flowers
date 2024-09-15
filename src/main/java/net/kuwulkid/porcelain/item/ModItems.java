@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import net.kuwulkid.porcelain.PorcelainFlowers;
 import net.kuwulkid.porcelain.blocks.ModBlocks;
 import net.kuwulkid.porcelain.entity.ModEntities;
+import net.kuwulkid.porcelain.item.custom.HungeringScytheItem;
 import net.kuwulkid.porcelain.item.custom.VorpalGemItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -21,7 +22,11 @@ import static net.minecraft.world.item.Items.registerItem;
 public class ModItems {
     public static final Map<ResourceLocation, Item> ITEMS = Maps.newLinkedHashMap();
 
-    public static final Item VORPAL_GEM = register("vorpal_gem", new VorpalGemItem(ModTiers.AMETHYST, new Item.Properties().durability(42).attributes(VorpalGemItem.createAttributes(Tiers.GOLD, 19, -2.4F)).rarity(Rarity.RARE)));
+    public static final Item VORPAL_GEM = register("vorpal_gem", new VorpalGemItem(ModTiers.AMETHYST, new Item.Properties().durability(42).
+            attributes(VorpalGemItem.createAttributes(Tiers.GOLD, 19, -2.4F)).rarity(Rarity.RARE)));
+
+    public static final Item HUNGERING_SCYTHE = register("hungering_scythe", new HungeringScytheItem(ModTiers.COPPER, new Item.Properties().durability(128).
+            attributes(HungeringScytheItem.createAttributes(Tiers.IRON, 4, -3.4F)).rarity(Rarity.EPIC)));
 
     public static final Item JUNGLE_LABORER_SPAWN_EGG = registerItem("jungle_laborer_spawn_egg", new SpawnEggItem(ModEntities.JUNGLELABORER, 8459049, 2368710, new Item.Properties()));
 

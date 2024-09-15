@@ -28,6 +28,7 @@ public class ModInventoryTab {
                 .title(Component.literal("Porce'lain Flo'wers"))
                 .displayItems((itemDisplayParameters, output) -> {
                     output.accept(ModItems.VORPAL_GEM);
+                    output.accept(ModItems.HUNGERING_SCYTHE);
                     output.accept(ModBlocks.ARTIFACT_ALTAR);
                     output.accept(ModBlocks.BEACH_FERN);
                     output.accept(ModItems.JUNGLE_LABORER_SPAWN_EGG);

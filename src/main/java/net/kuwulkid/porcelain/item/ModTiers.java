@@ -12,7 +12,8 @@ import java.util.function.Supplier;
 
 public enum ModTiers implements Tier {
 
-    AMETHYST(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 0.0F, 22, () -> Ingredient.of(Items.AMETHYST_SHARD));
+    AMETHYST(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 0.0F, 22, () -> Ingredient.of(Items.AMETHYST_SHARD)),
+    COPPER(BlockTags.INCORRECT_FOR_GOLD_TOOL, 32, 12.0F, 126.0F, 22, () -> Ingredient.of(Items.COPPER_INGOT));
 
     private final TagKey<Block> incorrectBlocksForDrops;
     private final int uses;

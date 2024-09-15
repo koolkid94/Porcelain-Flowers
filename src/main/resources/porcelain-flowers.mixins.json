@@ -3,6 +3,7 @@
 	"package": "net.kuwulkid.porcelain.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
+		"LivingEnttyMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
