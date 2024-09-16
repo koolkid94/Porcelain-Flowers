@@ -10,10 +10,7 @@ import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.SpawnEggItem;
-import net.minecraft.world.item.Tiers;
+import net.minecraft.world.item.*;
 
 import java.util.Map;
 
@@ -25,14 +22,16 @@ public class ModItems {
     public static final Item VORPAL_GEM = register("vorpal_gem", new VorpalGemItem(ModTiers.AMETHYST, new Item.Properties().durability(42).
             attributes(VorpalGemItem.createAttributes(Tiers.GOLD, 19, -2.4F)).rarity(Rarity.RARE)));
 
-    public static final Item HUNGERING_SCYTHE = register("hungering_scythe", new HungeringScytheItem(ModTiers.COPPER, new Item.Properties().durability(128).
-            attributes(HungeringScytheItem.createAttributes(Tiers.IRON, 4, -3.4F)).rarity(Rarity.EPIC)));
+    public static final Item HUNGERING_SCYTHE = register(
+            "hungering_scythe", new HungeringScytheItem(ModTiers.COPPER, new Item.Properties().attributes(HungeringScytheItem.createAttributes(ModTiers.COPPER, 1, -2.4F)).rarity(Rarity.EPIC).durability(238))
+    );
 
     //public static final Item JUNGLE_LABORER_SPAWN_EGG = registerItem("jungle_laborer_spawn_egg", new SpawnEggItem(ModEntities.JUNGLELABORER, 8459049, 2368710, new Item.Properties()));
 
     //public static final Item VINE_TOME = register("vinetomeitem", new VineTomeItem(new Item.Properties()));
 
     //used for testing purposes, from @Zeratul4340
+    //https://github.com/Zeratul4340/Omicron43Reliquary/tree/main
     //public static final Item DELETER_CUBE = register("deleter_cube", new DeleterCubeItem(new Item.Properties()));
 
     public static Item registerBaseItem(String name) {
