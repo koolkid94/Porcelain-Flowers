@@ -94,11 +94,11 @@ public final class DeleterCubeItem extends Item implements GeoItem {
                 //normalize method returns a unit vector
 
                 if(target.getType() == HitResult.Type.BLOCK){
-                   /// for(double i = 0; i < magnitude; i++)
+                    /// for(double i = 0; i < magnitude; i++)
                     //{
-                        world.addParticle(ParticleTypes.GLOW_SQUID_INK, (double) pos.x(), (double) pos.y(), (double) pos.z(), 0, 0, 0);
-                        ((ServerLevel) world).sendParticles(ParticleTypes.GLOW_SQUID_INK, pos.x() ,pos.y(), pos.z(), 1, 0,0, 0 , 0);
-                        System.out.println("I HIT A BLOCK! at: " + pos.x() + " " + pos.y() + " " + pos.z());
+                    world.addParticle(ParticleTypes.GLOW_SQUID_INK, (double) pos.x(), (double) pos.y(), (double) pos.z(), 0, 0, 0);
+                    ((ServerLevel) world).sendParticles(ParticleTypes.GLOW_SQUID_INK, pos.x() ,pos.y(), pos.z(), 1, 0,0, 0 , 0);
+                    System.out.println("I HIT A BLOCK! at: " + pos.x() + " " + pos.y() + " " + pos.z());
                     //}
 
                 }
