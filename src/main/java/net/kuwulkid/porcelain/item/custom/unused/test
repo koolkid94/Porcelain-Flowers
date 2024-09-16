@@ -1,0 +1,16 @@
+            if(this.getAttributes().getValue(Attributes.ATTACK_DAMAGE) > 1){
+                double value = amount * 0.02;
+                if(ATTACK_DAMAGE - value > 1){
+                    this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(ATTACK_DAMAGE - value);
+                }
+                else{
+                    this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1);
+                }
+
+            }
+            else if(this.getAttributes().getValue(Attributes.ATTACK_DAMAGE) < 1){
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1);
+            }
+            else{
+                this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(1);
+            }
