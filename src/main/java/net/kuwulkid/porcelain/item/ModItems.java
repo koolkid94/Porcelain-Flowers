@@ -6,6 +6,7 @@ import net.kuwulkid.porcelain.blocks.ModBlocks;
 import net.kuwulkid.porcelain.entity.ModEntities;
 import net.kuwulkid.porcelain.item.custom.HungeringScytheItem;
 import net.kuwulkid.porcelain.item.custom.VorpalGemItem;
+import net.kuwulkid.porcelain.item.custom.unused.DeleterCubeItem;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
@@ -32,7 +33,7 @@ public class ModItems {
 
     //used for testing purposes, from @Zeratul4340
     //https://github.com/Zeratul4340/Omicron43Reliquary/tree/main
-    //public static final Item DELETER_CUBE = register("deleter_cube", new DeleterCubeItem(new Item.Properties()));
+    public static final Item DELETER_CUBE = register("deleter_cube", new DeleterCubeItem(new Item.Properties()));
 
     public static Item registerBaseItem(String name) {
         return register(name, new Item(new Item.Properties()));

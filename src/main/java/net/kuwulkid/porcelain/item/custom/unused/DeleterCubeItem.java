@@ -1,5 +1,6 @@
 package net.kuwulkid.porcelain.item.custom.unused;
 
+import com.mojang.brigadier.CommandDispatcher;
 import net.kuwulkid.porcelain.client.renderer.item.DeleterCubeRenderer;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.server.level.ServerLevel;
@@ -9,6 +10,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -28,8 +30,6 @@ public final class DeleterCubeItem extends Item implements GeoItem {
 
     private static final RawAnimation IDLE = RawAnimation.begin().thenPlay("animation.deleter_cube.idle");
     private static final RawAnimation ATTACK_START = RawAnimation.begin().thenPlay("animation.deleter_cube.attack_start");
-    private static final RawAnimation BEAM_LOOP = RawAnimation.begin().thenPlay("animation.deleter_cube.beam_loop");
-    private static final RawAnimation ATTACK_END = RawAnimation.begin().thenPlay("animation.deleter_cube.attack_end");
     private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public DeleterCubeItem(Properties settings) {
@@ -58,19 +58,11 @@ public final class DeleterCubeItem extends Item implements GeoItem {
     public void registerControllers(AnimatableManager.ControllerRegistrar controllers) {
         controllers.add(new AnimationController<>(this, "on_attack_controller", 0, state -> PlayState.STOP)
                 .triggerableAnim("attack_start", ATTACK_START));
+
+        controllers.add(new AnimationController<>(this, "idle_controller", 0, state -> PlayState.CONTINUE)
+                .triggerableAnim("idle", IDLE));
         // We've marked the "attack_start" animation as being triggerable from the server
 
-        controllers.add(new AnimationController<>(this, "beam_loop_controller", 0, state -> PlayState.STOP)
-                .triggerableAnim("beam_loop", BEAM_LOOP)                .setSoundKeyframeHandler(state -> {
-                    // Use helper method to avoid client-code in common class
-                    //PlayerEntity player = ClientUtil.getClientPlayer();
-
-                    //if (player != null)
-                    //player.playSound(SoundRegistry.JACK_MUSIC, 1, 1);
-                }));
-        controllers.add(new AnimationController<>(this, "attack_end_controller", 0, state -> PlayState.STOP)
-                .triggerableAnim("attack_end", ATTACK_END));
-        controllers.add(new AnimationController<>(this, "idle_controller", 0, this::idlePredicate));
     }
 
     @Override
@@ -80,23 +72,18 @@ public final class DeleterCubeItem extends Item implements GeoItem {
                 triggerAnim(player, GeoItem.getOrAssignId(player.getUseItem(), serverWorld), "on_attack_controller", "attack_start");
                 alreadyStartedUsing = true;
             }
-            triggerAnim(player, GeoItem.getOrAssignId(player.getUseItem(), serverWorld), "beam_loop_controller", "beam_loop");
-        }
-        return super.use(world, player, hand);
-    }
-
-
-    public void onStoppedUsing(ItemStack stack, Level world, LivingEntity user, int remainingUseTicks) {
-        if (world instanceof ServerLevel serverWorld) {
-            triggerAnim(user, GeoItem.getOrAssignId(user.getUseItem(), serverWorld), "attack_end_controller", "attack_end");
+            triggerAnim(player, GeoItem.getOrAssignId(player.getUseItem(), serverWorld), "idle_controller", "idle");
             alreadyStartedUsing = false;
         }
+        return ItemUtils.startUsingInstantly(world, player, hand);
     }
+
+
 
     private PlayState idlePredicate(AnimationState<DeleterCubeItem> deleterCubeItemAnimationState) {
         if (alreadyStartedUsing) {
             deleterCubeItemAnimationState.getController().stop();
-            return PlayState.STOP;
+            return PlayState.STOP   ;
         }
         deleterCubeItemAnimationState.getController().setAnimation(IDLE);
         return PlayState.CONTINUE;
