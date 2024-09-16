@@ -34,35 +34,35 @@ public class HungeringScytheItem extends SwordItem {
     public void postHurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity attacker) {
         itemStack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
         double scale = attacker.getAttributeValue(Attributes.SCALE);
-        attacker.getAttributeValue(Attributes.MAX_ABSORPTION);
-        double strength = attacker.getAttributeValue(Attributes.MAX_ABSORPTION);
+                          attacker.getAttributeValue(Attributes.ATTACK_DAMAGE);
+        double strength = attacker.getAttributeValue(Attributes.ATTACK_DAMAGE);
         BlockPos pos = target.getOnPos();
         double d =  0.6;
         double f =   0.6;
         target.level().addParticle(ParticleTypes.SCRAPE, (double)pos.getX() + d, (double)pos.getY() + 2, (double)pos.getZ() + f, 0.0, 0.0, 0.0);
         if(attacker instanceof Player player){
-            player.causeFoodExhaustion(20);
+           player.causeFoodExhaustion(20);
             attacker.playSound(SoundEvents.PLAYER_BURP, 6, 4);
         }
 
-        if(scale < 1.5)
-        {
-            Objects.requireNonNull(attacker.getAttribute(Attributes.SCALE)).setBaseValue(scale + 0.025);
-            Objects.requireNonNull(attacker.getAttribute(Attributes.MAX_ABSORPTION)).setBaseValue(strength + 0.025);
-            System.out.println("JUST INCRASED ATTCK DAMAGE " + strength);
-        }
+            if(scale < 1.5)
+            {
+                Objects.requireNonNull(attacker.getAttribute(Attributes.SCALE)).setBaseValue(scale + 0.025);
+                Objects.requireNonNull(attacker.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(strength + 0.025);
+                System.out.println("JUST INCRASED ATTCK DAMAGE " + strength);
+            }
     }
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (entity instanceof LivingEntity thug && !isSelected  ) {
-            if ( Objects.requireNonNull(thug.getAttribute(Attributes.SCALE)).getBaseValue() != 1 || Objects.requireNonNull(thug.getAttribute(Attributes.MAX_ABSORPTION)).getBaseValue() != 1 ) {
-                thug.playSound(SoundEvents.COPPER_HIT, 3, 4);
-                Objects.requireNonNull(thug.getAttribute(Attributes.SCALE)).setBaseValue(1);
-                Objects.requireNonNull(thug.getAttribute(Attributes.MAX_ABSORPTION)).setBaseValue(1);
+            if ( Objects.requireNonNull(thug.getAttribute(Attributes.SCALE)).getBaseValue() != 1 || Objects.requireNonNull(thug.getAttribute(Attributes.SCALE)).getBaseValue() != 1 ) {
+                    thug.playSound(SoundEvents.COPPER_HIT, 3, 4);
+                    Objects.requireNonNull(thug.getAttribute(Attributes.SCALE)).setBaseValue(1);
+                 Objects.requireNonNull(thug.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(1);
                 System.out.println("JUST 1 ATTCK DAMAGdE");
 
-            }
+                }
         }
     }
 }
