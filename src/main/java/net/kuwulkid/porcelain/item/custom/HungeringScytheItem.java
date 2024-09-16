@@ -34,8 +34,6 @@ public class HungeringScytheItem extends SwordItem {
     public void postHurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity attacker) {
         itemStack.hurtAndBreak(1, attacker, EquipmentSlot.MAINHAND);
         double scale = attacker.getAttributeValue(Attributes.SCALE);
-        attacker.getAttributeValue(Attributes.MAX_ABSORPTION);
-        double strength = attacker.getAttributeValue(Attributes.MAX_ABSORPTION);
         BlockPos pos = target.getOnPos();
         double d =  0.6;
         double f =   0.6;
@@ -47,19 +45,19 @@ public class HungeringScytheItem extends SwordItem {
 
         if(scale < 1.5)
         {
-            Objects.requireNonNull(attacker.getAttribute(Attributes.SCALE)).setBaseValue(scale + 0.025);
-            Objects.requireNonNull(attacker.getAttribute(Attributes.MAX_ABSORPTION)).setBaseValue(strength + 0.025);
-            System.out.println("JUST INCRASED ATTCK DAMAGE " + strength);
+            Objects.requireNonNull(attacker.getAttribute(Attributes.SCALE)).setBaseValue(scale + 0.02);
+            Objects.requireNonNull(attacker.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(scale + 0.02);
         }
     }
 
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (entity instanceof LivingEntity thug && !isSelected  ) {
-            if ( Objects.requireNonNull(thug.getAttribute(Attributes.SCALE)).getBaseValue() != 1 || Objects.requireNonNull(thug.getAttribute(Attributes.MAX_ABSORPTION)).getBaseValue() != 1 ) {
-                thug.playSound(SoundEvents.COPPER_HIT, 3, 4);
-                Objects.requireNonNull(thug.getAttribute(Attributes.SCALE)).setBaseValue(1);
-                Objects.requireNonNull(thug.getAttribute(Attributes.MAX_ABSORPTION)).setBaseValue(1);
+            double scale = thug.getAttributeValue(Attributes.SCALE);
+            if ( Objects.requireNonNull(thug.getAttribute(Attributes.SCALE)).getBaseValue() > 1) {
+                thug.playSound(SoundEvents.COPPER_HIT, 3, (float) (scale - 0.1));
+                Objects.requireNonNull(thug.getAttribute(Attributes.SCALE)).setBaseValue(scale - 0.02);
+                Objects.requireNonNull(thug.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(scale - 0.02);
                 System.out.println("JUST 1 ATTCK DAMAGdE");
 
             }

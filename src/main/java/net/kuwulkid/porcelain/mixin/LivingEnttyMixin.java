@@ -66,32 +66,7 @@ public abstract class LivingEnttyMixin {
             Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(1);
         }
 
-        if(this.getAttribute(Attributes.MAX_ABSORPTION) != null && this.getItemInHand(InteractionHand.MAIN_HAND).equals(ModItems.HUNGERING_SCYTHE)){
-            double strength = this.getAttributeValue(Attributes.MAX_ABSORPTION);
-            System.out.println("I JUST GOT HURT HERE: " + amount + " AND MY STRENGTH IS " + strength);
-            if(this.getAttributeValue(Attributes.MAX_ABSORPTION) > 1){
-                double value2 = amount * 0.02;
-                System.out.println("THE VALUE IS " + value2);
-                if(strength - value2 > 1){
 
-                    System.out.println("README BEFORE " + (strength));
-                    Objects.requireNonNull(this.getAttribute(Attributes.MAX_ABSORPTION)).setBaseValue(strength - value2);
-                    System.out.println("README AFTER " + (strength - value2));
-                }
-                else{
-                    Objects.requireNonNull(this.getAttribute(Attributes.MAX_ABSORPTION)).setBaseValue(1);
-                    System.out.println("JUST 1 ATTCK DAMAGE");
-                }
-            }
-            else if(this.getAttributes().getValue(Attributes.MAX_ABSORPTION) < 1){
-                Objects.requireNonNull(this.getAttribute(Attributes.MAX_ABSORPTION)).setBaseValue(1);
-                System.out.println("JUST 1 ATTCKK DAMAGE");
-            }
-            else{
-                Objects.requireNonNull(this.getAttribute(Attributes.MAX_ABSORPTION)).setBaseValue(1);
-                System.out.println("JUST 1 ATTCKKK DAMAGE");
-            }
-        }
 
     }
 
@@ -99,9 +74,7 @@ public abstract class LivingEnttyMixin {
     private void init(CallbackInfo ci) {
         if(this.getHealth() <= 0){
             Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(1);
-            if(this.getAttribute(Attributes.MAX_ABSORPTION) != null){
-                Objects.requireNonNull(this.getAttribute(Attributes.MAX_ABSORPTION)).setBaseValue(1);
-            }
+            Objects.requireNonNull(this.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(1);
         }
     }
 }
