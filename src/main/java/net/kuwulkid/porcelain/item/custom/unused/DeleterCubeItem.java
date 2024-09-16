@@ -2,7 +2,10 @@ package net.kuwulkid.porcelain.item.custom.unused;
 
 import com.mojang.brigadier.CommandDispatcher;
 import net.kuwulkid.porcelain.client.renderer.item.DeleterCubeRenderer;
+import net.minecraft.client.multiplayer.chat.LoggedChatEvent;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.core.Position;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -12,6 +15,9 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.HitResult;
+import net.minecraft.world.phys.Vec2;
+import net.minecraft.world.phys.Vec3;
 import org.jetbrains.annotations.Nullable;
 import software.bernie.geckolib.animatable.GeoItem;
 import software.bernie.geckolib.animatable.SingletonGeoAnimatable;
@@ -71,6 +77,33 @@ public final class DeleterCubeItem extends Item implements GeoItem {
             if (!alreadyStartedUsing) {
                 triggerAnim(player, GeoItem.getOrAssignId(player.getUseItem(), serverWorld), "on_attack_controller", "attack_start");
                 alreadyStartedUsing = true;
+
+                HitResult target = player.pick(20, 0, true); //raycast
+                Vec3 eyePos = player.getEyePosition();
+                Vec2 rot = player.getRotationVector();
+                Vec3 endPos = target.getLocation();
+                Vec3 startPos = player.getPosition(0);
+                Double magnitude = endPos.distanceTo(startPos);
+                System.out.println("THE MAGNITUDE IS "+ magnitude);
+                Position pos = endPos;
+
+                //PQ = d = √ [(x2 – x1)2 + (y2 – y1)2 + (z2 – z1)2].
+                //distance between two points in 3d space
+
+                //endPos.normalize().multiply(magnitude, magnitude, magnitude);
+                //normalize method returns a unit vector
+
+                if(target.getType() == HitResult.Type.BLOCK){
+                   /// for(double i = 0; i < magnitude; i++)
+                    //{
+                        world.addParticle(ParticleTypes.GLOW_SQUID_INK, (double) pos.x(), (double) pos.y(), (double) pos.z(), 0, 0, 0);
+                        ((ServerLevel) world).sendParticles(ParticleTypes.GLOW_SQUID_INK, pos.x() ,pos.y(), pos.z(), 1, 0,0, 0 , 0);
+                        System.out.println("I HIT A BLOCK! at: " + pos.x() + " " + pos.y() + " " + pos.z());
+                    //}
+
+                }
+
+
             }
             triggerAnim(player, GeoItem.getOrAssignId(player.getUseItem(), serverWorld), "idle_controller", "idle");
             alreadyStartedUsing = false;
