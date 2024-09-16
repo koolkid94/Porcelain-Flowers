@@ -42,7 +42,6 @@ public class HungeringScytheItem extends SwordItem {
             player.causeFoodExhaustion(20);
             attacker.playSound(SoundEvents.PLAYER_BURP, 6, 4);
         }
-
         if(scale < 1.5)
         {
             Objects.requireNonNull(attacker.getAttribute(Attributes.SCALE)).setBaseValue(scale + 0.02);
@@ -59,7 +58,6 @@ public class HungeringScytheItem extends SwordItem {
                 Objects.requireNonNull(thug.getAttribute(Attributes.SCALE)).setBaseValue(scale - 0.02);
                 Objects.requireNonNull(thug.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(scale - 0.02);
                 System.out.println("JUST 1 ATTCK DAMAGdE");
-
             }
         }
     }

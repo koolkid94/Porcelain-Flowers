@@ -49,7 +49,26 @@ public abstract class LivingEnttyMixin {
     private void init(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 
         double scale = this.getAttributeValue(Attributes.SCALE);
-        //10          4
+        double strength = this.getAttributeBaseValue(Attributes.ATTACK_DAMAGE);
+
+        if(this.getAttribute(Attributes.ATTACK_DAMAGE) != null){
+            if(this.getAttributes().getValue(Attributes.ATTACK_DAMAGE) > 1){
+                double value = amount * 0.02;
+                if(scale - value > 1){
+                    Objects.requireNonNull(this.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(scale - value);
+                }
+                else{
+                    Objects.requireNonNull(this.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(1);
+                }
+            }
+            else if(this.getAttributes().getValue(Attributes.ATTACK_DAMAGE) < 1){
+                Objects.requireNonNull(this.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(1);
+            }
+            else{
+                Objects.requireNonNull(this.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(1);
+            }
+        }
+
         if(this.getAttributes().getValue(Attributes.SCALE) > 1){
             double value = amount * 0.02;
             if(scale - value > 1){
@@ -65,8 +84,6 @@ public abstract class LivingEnttyMixin {
         else{
             Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(1);
         }
-
-
 
     }
 
