@@ -45,6 +45,8 @@ public class PorcelainFlowers implements ModInitializer {
 
 		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.BEACH), GenerationStep.Decoration.VEGETAL_DECORATION, ModPlacedFeatures.FERN_GROVE);
 		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.FOREST), GenerationStep.Decoration.TOP_LAYER_MODIFICATION, ModPlacedFeatures.FALLEN_TREE);
+		BiomeModifications.addFeature(BiomeSelectors.includeByKey(Biomes.DRIPSTONE_CAVES), GenerationStep.Decoration.UNDERGROUND_ORES, ModPlacedFeatures.PERIDOT_ORE);
+
 
 		LOGGER.info("Hello thug...");
 

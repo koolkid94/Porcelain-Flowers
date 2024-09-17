@@ -2,6 +2,7 @@ package net.kuwulkid.porcelain;
 
 import net.fabricmc.fabric.api.datagen.v1.DataGeneratorEntrypoint;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataGenerator;
+import net.kuwulkid.porcelain.tag.BlockTagInfuser;
 import net.kuwulkid.porcelain.world.feature.ModConfiguredFeatures;
 import net.kuwulkid.porcelain.world.feature.ModConfiguredFeaturesProvider;
 import net.kuwulkid.porcelain.world.feature.ModPlacedFeatures;
@@ -15,6 +16,7 @@ public class PorcelainFlowersDataGenerator implements DataGeneratorEntrypoint {
 		FabricDataGenerator.Pack pack = fabricDataGenerator.createPack();
 		pack.addProvider(ModConfiguredFeaturesProvider::new);
 		pack.addProvider(ModPlacedFeaturesProvider::new);
+		pack.addProvider(BlockTagInfuser::new);
 		System.out.println("DATAGEN HI");
 
 	}

@@ -1,7 +1,14 @@
 {
   "block.porcelainflowers.beach_fern": "Beach Fern",
-  "block.porcelainflowers.artifact_altar": "Artifact Altar",
+  "block.porcelainflowers.artifact_altar": "Gemstone Crafting Altar",
   "item.porcelainflowers.vorpal_gem": "Vorpal Gem",
+  "item.porcelainflowers.peridot": "Deep Stone Peridot",
+  "item.porcelainflowers.jade": "Jungle Jade",
+  "item.porcelainflowers.citrine": "Ashen Citrine",
+  "block.porcelainflowers.peridot_ore": "Dripstone Peridot Ore",
+  "item.porcelainflowers.quartz_sword": "Quartz Sword",
+  "item.porcelainflowers.soul_scythe": "Vulture's Soul",
+  "item.porcelainflowers.hilt": "Empty Crystalline Hilt",
   "item.porcelainflowers.hungering_scythe": "Hungering Scythe",
   "entity.porcelainflowers.jungle_laborer": "Jungle Laborer",
   "item.porcelainflowers.jungle_laborer_spawn_egg" : "Jungle Farmer Spawn Egg"

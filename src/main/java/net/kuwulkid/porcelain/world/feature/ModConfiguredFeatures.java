@@ -2,7 +2,7 @@ package net.kuwulkid.porcelain.world.feature;
 
 import net.kuwulkid.porcelain.PorcelainFlowers;
 import net.kuwulkid.porcelain.blocks.ModBlocks;
-import net.kuwulkid.porcelain.world.feature.test.FallenTreeFeatureConfig;
+import net.kuwulkid.porcelain.world.feature.special.FallenTreeFeatureConfig;
 import net.minecraft.core.Direction;
 import net.minecraft.core.HolderGetter;
 import net.minecraft.core.registries.Registries;
@@ -16,17 +16,41 @@ import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.configurations.FeatureConfiguration;
+import net.minecraft.world.level.levelgen.feature.configurations.OreConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.RandomPatchConfiguration;
 import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConfiguration;
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
+import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+
+import java.util.List;
 
 public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FERN_GROVE = registerConfiguredFeature("fern_grove");
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_TREE = registerConfiguredFeature("fallen_tree");
+    public static final ResourceKey<ConfiguredFeature<?, ?>> PERIDOT_ORE = registerConfiguredFeature("peridot_ore");
 
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> bootstrapContext) {
+        //assigns keys to registered feature
         HolderGetter<ConfiguredFeature<?, ?>> holderGetter = bootstrapContext.lookup(Registries.CONFIGURED_FEATURE);
+
+        RuleTest deepslateOreReplaceables = new BlockMatchTest(Blocks.DRIPSTONE_BLOCK);
+
+
+
+        FeatureUtils.register(
+                bootstrapContext,
+                PERIDOT_ORE,
+                Feature.ORE,
+                new OreConfiguration(
+                        List.of(
+                                OreConfiguration.target(deepslateOreReplaceables, ModBlocks.PERIDOT_ORE.defaultBlockState())
+                        ),
+                        3
+                )
+        );
+
 
         FeatureUtils.register(
                 bootstrapContext,

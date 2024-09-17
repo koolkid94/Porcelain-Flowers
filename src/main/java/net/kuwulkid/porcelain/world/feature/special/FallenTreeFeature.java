@@ -1,25 +1,15 @@
-package net.kuwulkid.porcelain.world.feature.test;
+package net.kuwulkid.porcelain.world.feature.special;
 
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.data.models.blockstates.VariantProperties;
 import net.minecraft.tags.BlockTags;
-import net.minecraft.util.RandomSource;
-import net.minecraft.util.valueproviders.IntProvider;
-import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.level.WorldGenLevel;
 import net.minecraft.world.level.block.*;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.levelgen.feature.Feature;
 import net.minecraft.world.level.levelgen.feature.FeaturePlaceContext;
-import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 
-import java.awt.image.TileObserver;
 import java.util.Random;
-
-import static net.minecraft.world.level.block.DirectionalBlock.FACING;
 
 public class FallenTreeFeature extends Feature<FallenTreeFeatureConfig>
 {

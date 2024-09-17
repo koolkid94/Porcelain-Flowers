@@ -2,8 +2,8 @@ package net.kuwulkid.porcelain.world.feature;
 
 import com.google.common.collect.Maps;
 import net.kuwulkid.porcelain.PorcelainFlowers;
-import net.kuwulkid.porcelain.world.feature.test.FallenTreeFeature;
-import net.kuwulkid.porcelain.world.feature.test.FallenTreeFeatureConfig;
+import net.kuwulkid.porcelain.world.feature.special.FallenTreeFeature;
+import net.kuwulkid.porcelain.world.feature.special.FallenTreeFeatureConfig;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;

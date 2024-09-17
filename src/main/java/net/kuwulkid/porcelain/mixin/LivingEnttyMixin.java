@@ -49,11 +49,11 @@ public abstract class LivingEnttyMixin {
     private void init(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
 
         double scale = this.getAttributeValue(Attributes.SCALE);
-        double strength = this.getAttributeBaseValue(Attributes.ATTACK_DAMAGE);
 
         if(this.getAttribute(Attributes.ATTACK_DAMAGE) != null){
+            double strength = this.getAttributeBaseValue(Attributes.ATTACK_DAMAGE);
             if(this.getAttributes().getValue(Attributes.ATTACK_DAMAGE) > 1){
-                double value = amount * 0.02;
+                double value = amount * 0.05;
                 if(scale - value > 1){
                     Objects.requireNonNull(this.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(scale - value);
                 }
@@ -69,27 +69,30 @@ public abstract class LivingEnttyMixin {
             }
         }
 
-        if(this.getAttributes().getValue(Attributes.SCALE) > 1){
-            double value = amount * 0.02;
-            if(scale - value > 1){
-                Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(scale - value);
+        if(this.getAttribute(Attributes.SCALE) != null){
+            if(this.getAttributes().getValue(Attributes.SCALE) > 1){
+                double value = amount * 0.05;
+                if(scale - value > 1){
+                    Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(scale - value);
+                }
+                else{
+                    Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(1);
+                }
+            }
+            else if(this.getAttributes().getValue(Attributes.SCALE) < 1){
+                Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(1);
             }
             else{
                 Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(1);
             }
         }
-        else if(this.getAttributes().getValue(Attributes.SCALE) < 1){
-            Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(1);
-        }
-        else{
-            Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(1);
-        }
+
 
     }
 
     @Inject(at = @At("HEAD"), method = "baseTick")
     private void init(CallbackInfo ci) {
-        if(this.getHealth() <= 0){
+        if(this.getHealth() <= 0 && this.getAttribute(Attributes.SCALE) != null && this.getAttribute(Attributes.ATTACK_DAMAGE) != null){
             Objects.requireNonNull(this.getAttribute(Attributes.SCALE)).setBaseValue(1);
             Objects.requireNonNull(this.getAttribute(Attributes.ATTACK_DAMAGE)).setBaseValue(1);
         }

@@ -16,12 +16,11 @@ import net.minecraft.world.item.alchemy.PotionContents;
 import net.minecraft.world.item.alchemy.Potions;
 import net.minecraft.world.item.component.ItemAttributeModifiers;
 
-//ability where upon attack starts timer (shown thru durability) and gives massive damage buff
 
-public class VorpalGemItem extends SwordItem {
+public class QuartzSwordItem extends SwordItem {
     int numOne = 0, numTwo = 3;
 
-    public VorpalGemItem(Tier tier, Properties properties) {
+    public QuartzSwordItem(Tier tier, Properties properties) {
         super(tier, properties);
         createAttributes(Tiers.GOLD, 12, 8);
     }
@@ -44,32 +43,27 @@ public class VorpalGemItem extends SwordItem {
     public void postHurtEnemy(ItemStack itemStack, LivingEntity target, LivingEntity attacker) {
         int rand = (int) ((5 - numOne + 1) * Math.random() + numOne);
         itemStack.hurtAndBreak( 2 , attacker, EquipmentSlot.MAINHAND);
-        target.level().addParticle(ParticleTypes.TOTEM_OF_UNDYING, (double)attacker.blockPosition().getX()+ Math.random(), (double)attacker.blockPosition().getY()+ 1, (double)attacker.blockPosition().getZ() + Math.random(), Math.random() * (1.001) , Math.random()  * (1.2), Math.random()  * (1.001));
-
         if(1 == (int) ((numTwo - numOne + 1) * Math.random() + numOne)) {
             BlockPos pos = target.blockPosition();
-            target.spawnAtLocation(Items.AMETHYST_SHARD);
-            attacker.level().levelEvent(2002, attacker.blockPosition(), PotionContents.getColor(Potions.TURTLE_MASTER));
+            target.spawnAtLocation(Items.QUARTZ);
+            attacker.level().levelEvent(2002, attacker.blockPosition(), PotionContents.getColor(Potions.INVISIBILITY));
             attacker.playSound(SoundEvents.ITEM_BREAK, 3, 4);
             itemStack.hurtAndBreak(128, attacker, EquipmentSlot.MAINHAND);
         }
 
         if(attacker.getUseItem().getDamageValue() <= 0)
         {
-            attacker.level().levelEvent(2002, attacker.blockPosition(), PotionContents.getColor(Potions.TURTLE_MASTER));
-            target.spawnAtLocation(Items.AMETHYST_SHARD);
+            attacker.level().levelEvent(2002, attacker.blockPosition(), PotionContents.getColor(Potions.INVISIBILITY));
+            target.spawnAtLocation(Items.QUARTZ);
             attacker.playSound(SoundEvents.ITEM_BREAK, 3, 4);
         }
 
-
         if(attacker instanceof Player){
             Player player = (Player) attacker;
-            if(!player.getAbilities().instabuild){
+            if( !player.getAbilities().instabuild){
                 attacker.setItemInHand(InteractionHand.MAIN_HAND, ModItems.HILT.getDefaultInstance());
             }
         }
-
-
     }
 
 }

@@ -7,16 +7,21 @@ import net.kuwulkid.porcelain.blocks.custom.BeachFernBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.DropExperienceBlock;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
 import java.util.Map;
+
+import static net.minecraft.world.level.block.Blocks.DEEPSLATE_LAPIS_ORE;
+import static net.minecraft.world.level.block.Blocks.DRIPSTONE_BLOCK;
 
 
 public class ModBlocks {
@@ -26,7 +31,9 @@ public class ModBlocks {
 
     public static final Block  BEACH_FERN = registerBlock((String) "beach_fern", new BeachFernBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).replaceable().noCollission().instabreak().sound(SoundType.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY)));
 
-    public static final Block  ARTIFACT_ALTAR = registerBlock((String) "artifact_altar", new ArtifactAltarBlock(BlockBehaviour.Properties.of().explosionResistance(28).noOcclusion().destroyTime(10).mapColor(MapColor.STONE).replaceable().sound(SoundType.STONE).pushReaction(PushReaction.IGNORE)));
+    public static final Block  ARTIFACT_ALTAR = registerBlock((String) "artifact_altar", new ArtifactAltarBlock(BlockBehaviour.Properties.of().explosionResistance(28).noOcclusion().destroyTime(10).mapColor(MapColor.STONE).sound(SoundType.STONE).pushReaction(PushReaction.IGNORE).forceSolidOn().isValidSpawn(Blocks::never)));
+
+    public static final Block PERIDOT_ORE = registerBlock("peridot_ore", new DropExperienceBlock(UniformInt.of(2, 5), BlockBehaviour.Properties.ofFullCopy(DRIPSTONE_BLOCK)));
 
 
     //public static final Block  BEACH_GRASSES = registerBlock((String) "beach_grasses", new BeachGrassesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).replaceable().noCollission().instabreak().sound(SoundType.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY)));
