@@ -11,6 +11,7 @@ import net.minecraft.data.worldgen.features.FeatureUtils;
 import net.minecraft.data.worldgen.placement.PlacementUtils;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.levelgen.blockpredicates.BlockPredicate;
 import net.minecraft.world.level.levelgen.feature.ConfiguredFeature;
@@ -22,6 +23,7 @@ import net.minecraft.world.level.levelgen.feature.configurations.SimpleBlockConf
 import net.minecraft.world.level.levelgen.feature.stateproviders.BlockStateProvider;
 import net.minecraft.world.level.levelgen.structure.templatesystem.BlockMatchTest;
 import net.minecraft.world.level.levelgen.structure.templatesystem.RuleTest;
+import net.minecraft.world.level.levelgen.structure.templatesystem.TagMatchTest;
 
 import java.util.List;
 
@@ -35,21 +37,11 @@ public class ModConfiguredFeatures {
         //assigns keys to registered feature
         HolderGetter<ConfiguredFeature<?, ?>> holderGetter = bootstrapContext.lookup(Registries.CONFIGURED_FEATURE);
 
-        RuleTest deepslateOreReplaceables = new BlockMatchTest(Blocks.DRIPSTONE_BLOCK);
+        RuleTest dripstone = new BlockMatchTest(Blocks.DRIPSTONE_BLOCK);
 
 
 
-        FeatureUtils.register(
-                bootstrapContext,
-                PERIDOT_ORE,
-                Feature.ORE,
-                new OreConfiguration(
-                        List.of(
-                                OreConfiguration.target(deepslateOreReplaceables, ModBlocks.PERIDOT_ORE.defaultBlockState())
-                        ),
-                        3
-                )
-        );
+        FeatureUtils.register(bootstrapContext, PERIDOT_ORE, Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(new BlockMatchTest(Blocks.DRIPSTONE_BLOCK), ModBlocks.PERIDOT_ORE.defaultBlockState()), OreConfiguration.target(new BlockMatchTest(Blocks.DRIPSTONE_BLOCK), ModBlocks.PERIDOT_ORE.defaultBlockState())), 9));
 
 
         FeatureUtils.register(

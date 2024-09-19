@@ -28,7 +28,7 @@ public class ModPlacedFeatures {
         HolderGetter<ConfiguredFeature<?, ?>> holderGetter = bootstrapContext.lookup(Registries.CONFIGURED_FEATURE);
         PlacementUtils.register(bootstrapContext, FERN_GROVE, holderGetter.getOrThrow(ModConfiguredFeatures.FERN_GROVE), CountPlacement.of(UniformInt.of(2, 3)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
         PlacementUtils.register(bootstrapContext, FALLEN_TREE, holderGetter.getOrThrow(ModConfiguredFeatures.FALLEN_TREE), InSquarePlacement.spread(), RandomOffsetPlacement.vertical(ConstantInt.of(-3)), RarityFilter.onAverageOnceEvery(20), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
-        PlacementUtils.register(bootstrapContext, PERIDOT_ORE, holderGetter.getOrThrow(ModConfiguredFeatures.PERIDOT_ORE), commonOrePlacement(8, HeightRangePlacement.triangle(VerticalAnchor.absolute(32), VerticalAnchor.absolute(-64))));
+        PlacementUtils.register(bootstrapContext, PERIDOT_ORE, holderGetter.getOrThrow(ModConfiguredFeatures.PERIDOT_ORE), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(48))));
 
     }
 
