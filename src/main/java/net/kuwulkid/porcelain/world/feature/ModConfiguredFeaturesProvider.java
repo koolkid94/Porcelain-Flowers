@@ -20,6 +20,7 @@ public class ModConfiguredFeaturesProvider extends FabricDynamicRegistryProvider
         add(registries, entries, ModConfiguredFeatures.FERN_GROVE);
         add(registries, entries, ModConfiguredFeatures.FALLEN_TREE);
         add(registries, entries, ModConfiguredFeatures.PERIDOT_ORE);
+        add(registries, entries, ModConfiguredFeatures.JADE_ORE);
     }
 
 

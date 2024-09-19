@@ -35,6 +35,8 @@ public class ModBlocks {
 
     public static final Block PERIDOT_ORE = registerBlock("peridot_ore", new DropExperienceBlock(UniformInt.of(2, 5), BlockBehaviour.Properties.ofFullCopy(DRIPSTONE_BLOCK)));
 
+    public static final Block JADE_ORE = registerBlock("jade_ore", new DropExperienceBlock(UniformInt.of(3, 6), BlockBehaviour.Properties.ofFullCopy(DEEPSLATE_LAPIS_ORE)));
+
 
     //public static final Block  BEACH_GRASSES = registerBlock((String) "beach_grasses", new BeachGrassesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).replaceable().noCollission().instabreak().sound(SoundType.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY)));
 

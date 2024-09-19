@@ -32,16 +32,20 @@ public class ModConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> FALLEN_TREE = registerConfiguredFeature("fallen_tree");
     public static final ResourceKey<ConfiguredFeature<?, ?>> PERIDOT_ORE = registerConfiguredFeature("peridot_ore");
 
+    public static final ResourceKey<ConfiguredFeature<?, ?>> JADE_ORE = registerConfiguredFeature("jade_ore");
+
 
     public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> bootstrapContext) {
         //assigns keys to registered feature
         HolderGetter<ConfiguredFeature<?, ?>> holderGetter = bootstrapContext.lookup(Registries.CONFIGURED_FEATURE);
 
         RuleTest dripstone = new BlockMatchTest(Blocks.DRIPSTONE_BLOCK);
-
+        RuleTest jade = new BlockMatchTest(Blocks.DEEPSLATE);
 
 
         FeatureUtils.register(bootstrapContext, PERIDOT_ORE, Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(new BlockMatchTest(Blocks.DRIPSTONE_BLOCK), ModBlocks.PERIDOT_ORE.defaultBlockState()), OreConfiguration.target(new BlockMatchTest(Blocks.DRIPSTONE_BLOCK), ModBlocks.PERIDOT_ORE.defaultBlockState())), 9));
+
+        FeatureUtils.register(bootstrapContext, JADE_ORE, Feature.ORE, new OreConfiguration(List.of(OreConfiguration.target(new BlockMatchTest(Blocks.DEEPSLATE), ModBlocks.JADE_ORE.defaultBlockState()), OreConfiguration.target(new BlockMatchTest(Blocks.DEEPSLATE), ModBlocks.JADE_ORE.defaultBlockState())), 9));
 
 
         FeatureUtils.register(

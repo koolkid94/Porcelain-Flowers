@@ -24,11 +24,15 @@ public class ModPlacedFeatures {
 
     public static final ResourceKey<PlacedFeature> PERIDOT_ORE = registerPlacedFeature("peridot_ore");
 
+    public static final ResourceKey<PlacedFeature> JADE_ORE = registerPlacedFeature("jade_ore");
+
+
     public static void bootstrap(BootstrapContext<PlacedFeature> bootstrapContext) {
         HolderGetter<ConfiguredFeature<?, ?>> holderGetter = bootstrapContext.lookup(Registries.CONFIGURED_FEATURE);
         PlacementUtils.register(bootstrapContext, FERN_GROVE, holderGetter.getOrThrow(ModConfiguredFeatures.FERN_GROVE), CountPlacement.of(UniformInt.of(2, 3)), InSquarePlacement.spread(), PlacementUtils.RANGE_BOTTOM_TO_MAX_TERRAIN_HEIGHT, BiomeFilter.biome());
         PlacementUtils.register(bootstrapContext, FALLEN_TREE, holderGetter.getOrThrow(ModConfiguredFeatures.FALLEN_TREE), InSquarePlacement.spread(), RandomOffsetPlacement.vertical(ConstantInt.of(-3)), RarityFilter.onAverageOnceEvery(20), PlacementUtils.HEIGHTMAP_WORLD_SURFACE, BiomeFilter.biome());
         PlacementUtils.register(bootstrapContext, PERIDOT_ORE, holderGetter.getOrThrow(ModConfiguredFeatures.PERIDOT_ORE), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(48))));
+        PlacementUtils.register(bootstrapContext, JADE_ORE, holderGetter.getOrThrow(ModConfiguredFeatures.JADE_ORE), commonOrePlacement(10, HeightRangePlacement.uniform(VerticalAnchor.bottom(), VerticalAnchor.absolute(48))));
 
     }
 
