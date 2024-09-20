@@ -16,7 +16,7 @@ public class BlockTagInfuser extends FabricTagProvider.BlockTagProvider{
 
     @Override
     protected void addTags(HolderLookup.Provider wrapperLookup) {
-        this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ARTIFACT_ALTAR, ModBlocks.PERIDOT_ORE, ModBlocks.JADE_ORE);
-        this.getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.PERIDOT_ORE, ModBlocks.JADE_ORE);
+        this.getOrCreateTagBuilder(BlockTags.MINEABLE_WITH_PICKAXE).add(ModBlocks.ARTIFACT_ALTAR, ModBlocks.PERIDOT_ORE, ModBlocks.JADE_ORE, ModBlocks.CITRINE_ORE);
+        this.getOrCreateTagBuilder(BlockTags.NEEDS_STONE_TOOL).add(ModBlocks.PERIDOT_ORE, ModBlocks.JADE_ORE, ModBlocks.CITRINE_ORE);
     }
 }

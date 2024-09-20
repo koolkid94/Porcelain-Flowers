@@ -1,0 +1,30 @@
+{
+  "variants": {
+    "facing=down": {
+      "model": "porcelainflowers:block/citrine_crystals",
+      "x": 180
+    },
+    "facing=east": {
+      "model": "porcelainflowers:block/citrine_crystals",
+      "x": 90,
+      "y": 90
+    },
+    "facing=north": {
+      "model": "porcelainflowers:block/citrine_crystals",
+      "x": 90
+    },
+    "facing=south": {
+      "model": "porcelainflowers:block/citrine_crystals",
+      "x": 90,
+      "y": 180
+    },
+    "facing=up": {
+      "model": "porcelainflowers:block/citrine_crystals"
+    },
+    "facing=west": {
+      "model": "porcelainflowers:block/citrine_crystals",
+      "x": 90,
+      "y": 270
+    }
+  }
+}

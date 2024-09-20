@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "porcelainflowers:block/powered_budding_citrine",
+    "side": "minecraft:block/basalt_side"
+  }
+}

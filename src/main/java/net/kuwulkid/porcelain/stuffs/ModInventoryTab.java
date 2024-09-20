@@ -37,6 +37,7 @@ public class ModInventoryTab {
                     output.accept(ModBlocks.BEACH_FERN);
                     output.accept(ModBlocks.PERIDOT_ORE);
                     output.accept(ModBlocks.JADE_ORE);
+                    output.accept(ModBlocks.CITRINE_ORE);
 
                     output.accept(ModItems.PERIDOT);
                     output.accept(ModItems.JADE);

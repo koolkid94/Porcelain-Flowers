@@ -4,24 +4,21 @@ import com.google.common.collect.Maps;
 import net.kuwulkid.porcelain.PorcelainFlowers;
 import net.kuwulkid.porcelain.blocks.custom.ArtifactAltarBlock;
 import net.kuwulkid.porcelain.blocks.custom.BeachFernBlock;
+import net.kuwulkid.porcelain.blocks.custom.BuddingCitrineBlock;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.Blocks;
-import net.minecraft.world.level.block.DropExperienceBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.MapColor;
 import net.minecraft.world.level.material.PushReaction;
 
 import java.util.Map;
 
-import static net.minecraft.world.level.block.Blocks.DEEPSLATE_LAPIS_ORE;
-import static net.minecraft.world.level.block.Blocks.DRIPSTONE_BLOCK;
+import static net.minecraft.world.level.block.Blocks.*;
 
 
 public class ModBlocks {
@@ -37,6 +34,14 @@ public class ModBlocks {
 
     public static final Block JADE_ORE = registerBlock("jade_ore", new DropExperienceBlock(UniformInt.of(3, 6), BlockBehaviour.Properties.ofFullCopy(DEEPSLATE_LAPIS_ORE)));
 
+    public static final Block CITRINE_ORE = registerBlock("citrine_ore", new BuddingCitrineBlock(BlockBehaviour.Properties.of().randomTicks().mapColor(MapColor.COLOR_GRAY).strength(2.5F, 20)));
+
+       public static final Block CITRINE_CLUSTER = registerBlock(
+            "large_citrine_bud",
+            new AmethystClusterBlock(
+                    5.0F, 3.0F, BlockBehaviour.Properties.ofLegacyCopy(AMETHYST_CLUSTER).noOcclusion().sound(SoundType.BASALT).lightLevel(blockStatex -> 4)
+            )
+    );
 
     //public static final Block  BEACH_GRASSES = registerBlock((String) "beach_grasses", new BeachGrassesBlock(BlockBehaviour.Properties.of().mapColor(MapColor.GRASS).replaceable().noCollission().instabreak().sound(SoundType.GRASS).ignitedByLava().pushReaction(PushReaction.DESTROY)));
 

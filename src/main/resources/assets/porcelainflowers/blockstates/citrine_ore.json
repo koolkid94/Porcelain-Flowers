@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "porcelainflowers:block/citrine_ore"
+    },
+    "powered=true": {
+      "model": "porcelainflowers:block/citrine_ore_powered"
+    }
+  }
+}
